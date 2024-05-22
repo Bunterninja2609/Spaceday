@@ -6,11 +6,10 @@ end
 function love.draw()
 end
 function love.update(dt)
-    --damit die physik-welt auf rechnet, muss eine funktion dafür hier hin... 
-    --wenn es doch nur einfach wäre...
+    World:update(dt)
 end
-function spawnEntitaet()--ein Parameter für verschidene entitäten wäre schön... wie ginge das?
-    local vorlageEntitaet=require("Entities/kuh")-- TIP: konkatiniert wird mit '..'
+function spawnEntitaet(typ)--ein Parameter für verschidene entitäten wäre schön... wie ginge das?
+    local vorlageEntitaet=require("Entities"..typ)-- TIP: konkatiniert wird mit '..'
     local entitaet={}
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
