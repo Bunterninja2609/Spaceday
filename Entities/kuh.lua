@@ -13,7 +13,7 @@ end
 
 function kuh.update(dt)
     kuh.body:applyLinearImpulse(math.cos(kuh.direction)*kuh.speed,math.sin(kuh.direction)*kuh.speed)
-    kuh.body:setLinearVelocity(math.cos(kuh.direction)*kuh.speed,math.sin(kuh.direction)*kuh.speed)
+    kuh.body:setLinearVelocity(math.cos(kuh.direction)*kuh.speed,math.sin(kuh.direction)*kuh.speed)--applyLinearImpulse UND setLinearVelocity gleichzeitig macht keinen sinn
 
 end
 

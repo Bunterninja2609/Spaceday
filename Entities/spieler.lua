@@ -13,19 +13,19 @@ end
 
 function spieler.update(dt)
     spieler.body:applyLinearImpulse(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
-    spieler.body:setLinearVelocity(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
+    spieler.body:setLinearVelocity(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)--applyLinearImpulse UND setLinearVelocity gleichzeitig macht keinen sinn
     bewegeSpieler(spieler.x,spieler.y,spieler.speed)
 end
 
 function spieler.draw()
     zeichneSpieler(spieler.x,spieler.y,spieler.shape)
 end
-function zeichneSpieler(x,y,r)
+function zeichneSpieler(x,y,r) --sehr schön
     love.graphics.setColor(1,1,0)
     love.graphics.circle("fill",x,y,r)
 end
 
-function bewegeSpieler(x,y,speed,dt)
+function bewegeSpieler(x,y,speed,dt) --hier gibt es noch ein problem, ich spreche es in info an.
     if love.keyboard.isDown("w") then
         y = y-speed*dt
     elseif love.keyboard.isDown("s") then
