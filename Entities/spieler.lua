@@ -22,7 +22,7 @@ function spieler.draw()
 end
 function zeichneSpieler(x,y,r)
     love.graphics.setColor(1,1,0)
-    love.graphics.circle("fill",x,yK,r)
+    love.graphics.circle("fill",x,y,r)
 end
 
 function bewegeSpieler(x,y,speed,dt)
