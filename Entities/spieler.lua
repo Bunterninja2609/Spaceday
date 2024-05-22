@@ -8,16 +8,16 @@ local spieler={
     fixture = love.physics.newFixture(spieler.body,spieler.shape)
 }
 
-function spieler.load()
+function spieler:load()
 end
 
-function spieler.update(dt)
+function spieler:update(dt)
     spieler.body:applyLinearImpulse(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
     spieler.body:setLinearVelocity(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)--applyLinearImpulse UND setLinearVelocity gleichzeitig macht keinen sinn
     bewegeSpieler(spieler.x,spieler.y,spieler.speed)
 end
 
-function spieler.draw()
+function spieler:draw()
     zeichneSpieler(spieler.x,spieler.y,spieler.shape)
 end
 function zeichneSpieler(x,y,r) --sehr schön
