@@ -12,13 +12,13 @@ function spieler.load()
 end
 
 function spieler.update(dt)
-spieler.body:applyLinearImpulse(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
-spieler.body:setLinearVelocity(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
+    spieler.body:applyLinearImpulse(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
+    spieler.body:setLinearVelocity(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
     bewegeSpieler(spieler.x,spieler.y,spieler.speed)
 end
 
 function spieler.draw()
- zeichneSpieler(spieler.x,spieler.y,spieler.shape)
+    zeichneSpieler(spieler.x,spieler.y,spieler.shape)
 end
 function zeichneSpieler(x,y,r)
     love.graphics.setColor(1,1,0)
