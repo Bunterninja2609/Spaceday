@@ -1,24 +1,22 @@
-local spieler={
-    x=0,
-    y=0,
-    speed=100,
-    direction=1,
-    body = love.physics.newBody(World,spieler.x,spieler.y, "dynamic"),
-    shape = love.physics.newCircleShape(16),
-    fixture = love.physics.newFixture(spieler.body,spieler.shape)
-}
+local spieler={}
+    spieler.x=0,
+    spieler.y=0,
+    spieler.speed=100,
+    spieler.direction=1,
+    spieler.body = love.physics.newBody(World,spieler.x,spieler.y, "dynamic"),
+    spieler.shape = love.physics.newCircleShape(16),
+    spieler.fixture = love.physics.newFixture(spieler.body,spieler.shape)
 
-function spieler:load()
+function spieler.load()
 end
 
-function spieler:update(dt)
-    spieler.body:applyLinearImpulse(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)
-    spieler.body:setLinearVelocity(math.cos(spieler.direction)*spieler.speed,math.sin(spieler.direction)*spieler.speed)--applyLinearImpulse UND setLinearVelocity gleichzeitig macht keinen sinn
-    bewegeSpieler(spieler.x,spieler.y,spieler.speed)
+function spieler.update(dt)
+    self.body:setLinearVelocity(math.cos(self.direction)*self.speed,math.sin(self.direction)*self.speed)
+    bewegeSpieler(self.x,self.y,self.speed)
 end
 
-function spieler:draw()
-    zeichneSpieler(spieler.x,spieler.y,spieler.shape)
+function spieler.draw()
+    zeichneSpieler(self.x,self.y,self.shape)
 end
 function zeichneSpieler(x,y,r) --sehr schön
     love.graphics.setColor(1,1,0)
@@ -27,7 +25,7 @@ end
 
 function bewegeSpieler(x,y,speed,dt) --hier gibt es noch ein problem, ich spreche es in info an.
     if love.keyboard.isDown("w") then
-        y = y-speed*dt
+        y = y-speed*dt                 --setLinearvelocity!
     elseif love.keyboard.isDown("s") then
         y = y+speed*dt
     end
