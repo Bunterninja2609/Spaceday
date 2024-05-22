@@ -12,13 +12,11 @@ function kuh.load()
 end
 
 function kuh.update(dt)
-    self.body:applyLinearImpulse(math.cos(kuh.direction)*kuh.speed,math.sin(kuh.direction)*kuh.speed)
-    self.body:setLinearVelocity(math.cos(kuh.direction)*kuh.speed,math.sin(kuh.direction)*kuh.speed)--applyLinearImpulse UND setLinearVelocity gleichzeitig macht keinen sinn
-
+    self.body:applyLinearImpulse(math.cos(self.direction)*self.speed,math.sin(self.direction)*self.speed)
 end
 
 function kuh.draw()
-    zeichneKuh(kuh.x,kuh.y,kuh.shape)
+    zeichneKuh(self.x,self.y,self.shape)
 end
 
 function zeichneKuh(xKuh,yKuh,r)
