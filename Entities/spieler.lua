@@ -12,7 +12,7 @@ end
 
 function spieler.update(dt)
     self.body:setLinearVelocity(math.cos(self.direction)*self.speed,math.sin(self.direction)*self.speed)
-    bewegeSpieler(self.x,self.y,self.speed)
+    bewegeSpieler(self.speed)
 end
 
 function spieler.draw()
@@ -23,16 +23,16 @@ function zeichneSpieler(x,y,r) --sehr schön
     love.graphics.circle("fill",x,y,r)
 end
 
-function bewegeSpieler(x,y,speed,dt) --hier gibt es noch ein problem, ich spreche es in info an.
+function bewegeSpieler(speed) --hier gibt es noch ein problem, ich spreche es in info an.
     if love.keyboard.isDown("w") then
-        y = y-speed*dt                 --setLinearvelocity!
+        Body:setLinearVelocity(0,-speed)
     elseif love.keyboard.isDown("s") then
-        y = y+speed*dt
+        Body:setLinearVelocity(0,speed)
     end
     if love.keyboard.isDown("a") then
-        x = x-speed*dt
+        Body:setLinearVelocity(-speed,0)
     elseif love.keyboard.isDown("d") then
-        x = x+speeed*dt
+        Body:setLinearVelocity(speed,0)
     end
 end
 return spieler
