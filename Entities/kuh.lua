@@ -1,4 +1,4 @@
- local kuh={
+ local kuh={ -- syntax änderung; siehe spieler.lua
     x=0,
     y=0,
     speed=100,

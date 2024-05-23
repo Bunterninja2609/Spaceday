@@ -4,12 +4,14 @@ function love.load()
     Entitaeten={}
 end
 function love.draw()
+    -- jetzt brauchen wir noch einen ipairs loop um alle entitäten zu zeichnen
 end
 function love.update(dt)
+    -- jetzt brauchen wir noch einen ipairs loop um alle entitäten zu updaten
     World:update(dt)
 end
-function spawnEntitaet(typ)--ein Parameter für verschidene entitäten wäre schön... wie ginge das?
-    local vorlageEntitaet=require("Entities"..typ)-- TIP: konkatiniert wird mit '..'
+function spawnEntitaet(typ)
+    local vorlageEntitaet=require("Entities"..typ)
     local entitaet={}
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
