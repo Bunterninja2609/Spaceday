@@ -18,3 +18,9 @@ function spawnEntitaet(typ)
     end
     table.insert(Entitaeten,entitaet)
 end
+
+function platziereGehege(x,y)
+    if genugGeld == true then
+        spawnEntitaet(gehege)
+    end
+end
