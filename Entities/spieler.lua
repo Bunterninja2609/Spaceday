@@ -16,6 +16,7 @@ function spieler:update(dt)
 end
 
 function spieler:draw()
+    local self.x,self.y = self.body:getPosition()
     zeichneSpieler(self.x,self.y,self.shape)
 end
 function zeichneSpieler(x,y,r)
@@ -25,7 +26,7 @@ end
 
 function bewegeSpieler(speed,body)
     if love.keyboard.isDown("w") then
-        body:setLinearVelocity(0,-speed) -- Body ist nicht definiert
+        body:setLinearVelocity(0,-speed) 
     elseif love.keyboard.isDown("s") then
         body:setLinearVelocity(0,speed)
     end
