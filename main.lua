@@ -2,6 +2,9 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
+    spawnEntitaet("kuh")
+    spawnEntitaet("gehege")
+    spawnEntitaet("spieler")
 end
 
 function love.draw()
@@ -30,7 +33,7 @@ end
 
 function platziereGehege(x,y)
     if true then
-        spawnEntitaet(gehege)     
+        spawnEntitaet("gehege")     
     end
 end
 

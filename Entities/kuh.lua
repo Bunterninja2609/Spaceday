@@ -21,8 +21,8 @@ function bewegeKuh(kuh,speed,dt)
 end
 
 function kuh:draw()
-    local self.x,self.y = self.body:getPosition( ) --sehr schön
-    zeichneKuh(self.x,self.y,self.shape)
+    self.x,self.y = self.body:getPosition( ) --sehr schön
+    zeichneKuh(self.x,self.y,15)
 end
 
 function zeichneKuh(xKuh,yKuh,r)
