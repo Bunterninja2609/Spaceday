@@ -7,25 +7,25 @@ local spieler={}
     spieler.shape = love.physics.newCircleShape(16),
     spieler.fixture = love.physics.newFixture(spieler.body,spieler.shape)
 
-function spieler.load()
+function spieler.--[[":" nicht "."]]load()
 end
 
-function spieler.update(dt)
+function spieler.--[[":" nicht "."]]update(dt)
     self.body:setLinearVelocity(math.cos(self.direction)*self.speed,math.sin(self.direction)*self.speed)
     bewegeSpieler(self.speed)
 end
 
-function spieler.draw()
+function spieler.--[[":" nicht "."]]draw()
     zeichneSpieler(self.x,self.y,self.shape)
 end
-function zeichneSpieler(x,y,r) --sehr schön
+function zeichneSpieler(x,y,r)
     love.graphics.setColor(1,1,0)
     love.graphics.circle("fill",x,y,r)
 end
 
-function bewegeSpieler(speed) --hier gibt es noch ein problem, ich spreche es in info an.
+function bewegeSpieler(speed)
     if love.keyboard.isDown("w") then
-        Body:setLinearVelocity(0,-speed)
+        Body:setLinearVelocity(0,-speed) -- Body ist nicht definiert
     elseif love.keyboard.isDown("s") then
         Body:setLinearVelocity(0,speed)
     end

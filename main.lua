@@ -3,13 +3,18 @@ function love.load()
     love.physics.setMeter(32)
     Entitaeten={}
 end
+
 function love.draw()
     -- jetzt brauchen wir noch einen ipairs loop um alle entitäten zu zeichnen
 end
+
 function love.update(dt)
     -- jetzt brauchen wir noch einen ipairs loop um alle entitäten zu updaten
     World:update(dt)
 end
+
+
+
 function spawnEntitaet(typ)
     local vorlageEntitaet=require("Entities"..typ)
     local entitaet={}

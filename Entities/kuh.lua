@@ -8,21 +8,21 @@
     kuh.fixture = love.physics.newFixture(kuh.body,kuh.shape)
 
 
-function kuh.load()
+function kuh.--[[":" nicht "."]]load()
 end
 
-function kuh.update(dt)
+function kuh.--[[":" nicht "."]]update(dt)
     bewegeKuh(self.speed)
 end
 
 function bewegeKuh(speed,dt)
-    local self.direction= math.random()*2*math.pi
+    local self.direction= math.random()*2*math.pi--self ist nicht definiert
     self.body:applyLinearImpulse(math.cos(self.direction)*speed,math.sin(self.direction)*speed)
 end
 
-function kuh.draw()
-    local x, y = self.body:getPosition( )
-    zeichneKuh(x,y,self.shape)
+function kuh.--[[":" nicht "."]]draw()
+    local --[[self.]]x, --[[self.]]y = self.body:getPosition( ) --sehr schön
+    zeichneKuh(--[[self.]]x,--[[self.]]y,self.shape)
 end
 
 function zeichneKuh(xKuh,yKuh,r)
