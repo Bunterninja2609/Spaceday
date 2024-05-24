@@ -42,9 +42,6 @@ function love.mousepressed(x,y,button)
     if button == 1 then
         platziereGehege(x,y)
     end
-    if button == 2 then
-        platziereWeizen(x,y)
-    end
 end
 
 function platziereWeizen(x,y)
