@@ -52,3 +52,10 @@ function platziereWeizen(x,y)
         spawnEntitaet("weizen")     
     end
 end  
+     
+function love.keypressed(key)
+    if szene = 1 then 
+    if key == "space" then
+        szene = 2 
+    end 
+end
