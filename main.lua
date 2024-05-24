@@ -5,11 +5,15 @@ function love.load()
 end
 
 function love.draw()
-    -- jetzt brauchen wir noch einen ipairs loop um alle entitäten zu zeichnen
+   for i,v in ipairs(Entitaeten) do 
+    v:draw()
+   end
 end
 
 function love.update(dt)
-    -- jetzt brauchen wir noch einen ipairs loop um alle entitäten zu updaten
+    for i,v in ipairs(Entitaeten) do 
+        v:update(dt)
+    end
     World:update(dt)
 end
 
@@ -25,7 +29,13 @@ function spawnEntitaet(typ)
 end
 
 function platziereGehege(x,y)
-    if genugGeld == true then
-        spawnEntitaet(gehege)
+    if true then
+        spawnEntitaet(gehege)     
+    end
+end
+
+function love.mousepressed(x,y,button) 
+    if button == 1 then
+        platziereGehege(x,y)
     end
 end
