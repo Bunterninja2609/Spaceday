@@ -1,6 +1,6 @@
 local spieler={}
-    spieler.x=100
-    spieler.y=100
+    spieler.x=0
+    spieler.y=0
     spieler.speed=100
     spieler.direction=1
     spieler.body = love.physics.newBody(World,spieler.x,spieler.y, "dynamic")
