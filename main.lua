@@ -20,7 +20,7 @@ end
 
 
 function spawnEntitaet(typ)
-    local vorlageEntitaet=require("Entities"..typ)
+    local vorlageEntitaet=require("Entities/"..typ)
     local entitaet={}
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
