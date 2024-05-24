@@ -20,5 +20,7 @@ end
 
 function zeichneWeizen(xweizen,yweizen)
      love.graphics.setColor(218/255,165/255,32/255)
-     love.graphics.rectagle("fill",xweizen,yweizen,16,16)
+     love.graphics.rectangle("fill",xweizen,yweizen,16,16)
 end
+
+return weizen

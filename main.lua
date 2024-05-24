@@ -5,6 +5,7 @@ function love.load()
     spawnEntitaet("kuh")
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
+    spawnEntitaet("weizen")
 end
 
 function love.draw()
@@ -41,4 +42,20 @@ function love.mousepressed(x,y,button)
     if button == 1 then
         platziereGehege(x,y)
     end
+    if button == 2 then
+        platziereWeizen(x,y)
+    end
+end
+
+function platziereWeizen(x,y)
+    if true then
+        spawnEntitaet("weizen")     
+    end
+end  
+     
+function love.keypressed(key)
+    if szene = 1 then 
+    if key == "space" then
+        szene = 2 
+    end 
 end
