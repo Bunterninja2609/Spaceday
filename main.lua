@@ -54,8 +54,9 @@ function platziereWeizen(x,y)
 end  
      
 function love.keypressed(key)
-    if szene = 1 then 
-    if key == "space" then
-        szene = 2 
-    end 
+    if szene == 1 then 
+        if key == "space" then
+            szene = 2 
+        end 
+    end
 end
