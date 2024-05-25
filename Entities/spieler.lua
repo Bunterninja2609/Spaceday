@@ -1,6 +1,6 @@
 local spieler={}
-    spieler.x=0
-    spieler.y=0
+    spieler.x=100
+    spieler.y=100
     spieler.speed=100
     spieler.direction=1
     spieler.body = love.physics.newBody(World,spieler.x,spieler.y, "dynamic")
@@ -25,16 +25,18 @@ function zeichneSpieler(x,y,r)
 end
 
 function bewegeSpieler(speed,body)
-    body:setLinearVelocity(0,0) 
+    local speedX = 0
+    local speedY = 0 
     if love.keyboard.isDown("w") then
-        body:setLinearVelocity(0,-speed) 
+        speedY = -speed
     elseif love.keyboard.isDown("s") then
-        body:setLinearVelocity(0,speed)
+        speedY = speed
     end
     if love.keyboard.isDown("a") then
-        body:setLinearVelocity(-speed,0)
+        speedX = -speed
     elseif love.keyboard.isDown("d") then
-        body:setLinearVelocity(speed,0)
+        speedX = speed
     end
+    body:setLinearVelocity(speedX,speedY)
 end
 return spieler
