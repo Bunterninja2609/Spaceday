@@ -9,6 +9,7 @@ function love.load()
 end
 
 function love.draw()
+    love.graphics.setBackgroundColor(58/256, 68/256, 102/256)
    for i,v in ipairs(Entitaeten) do 
     v:draw()
    end
@@ -23,12 +24,13 @@ end
 
 
 
-function spawnEntitaet(typ)
+function spawnEntitaet(typ --[[, x, y]]) --für position
     local vorlageEntitaet=require("Entities/"..typ)
     local entitaet={}
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
     end
+    --entitaet.x, entitaet.y = x, y wäre eine möglichkeit
     table.insert(Entitaeten,entitaet)
 end
 
