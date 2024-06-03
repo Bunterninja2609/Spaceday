@@ -1,4 +1,5 @@
-local weizen={}
+local weizen={} 
+    --weizen.type = "weizen"
     weizen.x=0
     weizen.y=0
     weizen.body = love.physics.newBody(World,weizen.x,weizen.y, "static")
@@ -26,7 +27,7 @@ end
 
 function zeichneWeizen(fa,xweizen,yweizen)
      love.graphics.setColor(218/255,fa/10,32/255)
-     -- Farbe rot weg machen
+     --Farbe rot weg machen
      --Farbverlauf
      --love.graphics.setColor(218/255,165/255,32/255)
      love.graphics.rectangle("fill",xweizen,yweizen,16,16)
