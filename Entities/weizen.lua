@@ -18,15 +18,15 @@ end
 
 function weizen:update(dt)
     self.wachsTimer = self.wachsTimer+dt
-    if self.wachsTimer >= 10 then
+    if self.wachsTimer >= 3 then
         if self.farbeGruen >= 165 then
-        self.farbeGruen =  self.farbeGruen- 4
+            self.farbeGruen =  self.farbeGruen - 4 * dt --dt damit es etwas flüssiger läuft
         end
         if self.farbeBlau >= 32 then
-        self.farbeBlau =  self.farbeBlau- 1.8
+            self.farbeBlau =  self.farbeBlau - 1.8 * dt
         end
         if self.farbeRot <= 218 then
-        self.farbeRot = self.farbeRot + 6.4
+            self.farbeRot = self.farbeRot + 6.4 * dt
         end
     end
 
@@ -34,7 +34,7 @@ end
 
 function weizen:draw()
     self.x,self.y = self.body:getPosition( )
-    zeichneWeizen(self.farbeRot,self.farbeGruen,self.farbeBlau,self.x,self.y)
+    zeichneWeizen(self.farbeRot/256,self.farbeGruen/256,self.farbeBlau/256,self.x,self.y) --hier hattest du vergessen durch 256 zu teilen
     --Orientierung
     love.graphics.print(self.farbeGruen,600,300)
     love.graphics.print(self.wachsTimer,600,600)
