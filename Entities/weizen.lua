@@ -1,4 +1,5 @@
-local weizen={}
+local weizen={} 
+    --weizen.type = "weizen"
     weizen.x=0
     weizen.y=0
     weizen.body = love.physics.newBody(World,weizen.x,weizen.y, "static")

@@ -1,4 +1,5 @@
 local spieler={}
+    --spieler.type = "spieler"
     spieler.x=100
     spieler.y=100
     spieler.speed=100

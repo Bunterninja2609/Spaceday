@@ -1,4 +1,5 @@
  local kuh={} 
+    --kuh.type = "kuh"
     kuh.x=300
     kuh.y=300
     kuh.speed=10
