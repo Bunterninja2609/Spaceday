@@ -22,8 +22,6 @@ function love.update(dt)
     World:update(dt)
 end
 
-
-
 function spawnEntitaet(typ --[[, x, y]]) --für position
     local vorlageEntitaet=require("Entities/"..typ)
     local entitaet={}
@@ -40,13 +38,25 @@ function platziereGehege(x,y)
     end
 end
 
+function findEntityByType(typ)
+    for i, v in ipairs(Entitaeten) do
+        if v.type == typ then
+            return v
+        end
+    end
+end
+
 function love.mousepressed(x,y,button) 
     if button == 1 then
-        platziereGehege(x,y)
+        local kuh = findEntityByType("kuh")
+        if kuh then
+            kuh:IsClicked(x, y)
+        end
+        platziereGehege(x,y) 
     end
     if button == 2 then
         platziereWeizen(x,y)
-    end
+    end 
 end
 
 function platziereWeizen(x,y)
