@@ -6,6 +6,7 @@ function love.load()
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
+    spawnEntitaet("schwein")
 end
 
 function love.draw()
