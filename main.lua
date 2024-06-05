@@ -2,10 +2,10 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    spawnEntitaet("kuh")
-    spawnEntitaet("gehege")
-    spawnEntitaet("spieler")
-    spawnEntitaet("weizen")
+    spawnEntitaet("kuh",0,0)
+    spawnEntitaet("gehege",0,0)
+    spawnEntitaet("spieler",0,0)
+    spawnEntitaet("weizen",0,0)
 end
 
 function love.draw()
@@ -28,14 +28,15 @@ function spawnEntitaet(typ, x, y) --für position
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
     end
-    entitaet.x, entitaet.y = x, y --wäre eine möglichkeit
+   -- entitaet.body:setX(x)
+   -- entitaet.body:setY(y) --wäre eine möglichkeit
     entitaet: load()
     table.insert(Entitaeten,entitaet)
 end
 
 function platziereGehege(x,y)
     if true then
-        spawnEntitaet("gehege")     
+        spawnEntitaet("gehege",math.floor(x/16)*16,math.floor(y/16)*16)     
     end
 end
 function findEntityByType(typ)
