@@ -45,7 +45,7 @@ end
 
 function kuh:draw()
     self.x,self.y = self.body:getPosition()
-    zeichneKuh(self.x,self.y,self.kuhBild)
+    zeichneKuh(self.x-self.x*0.5,self.y-self.y*0.5,self.kuhBild)
      if self.isMelking == true then 
         zeichneMilch(self.x+30,self.y+30,10)
         zeigeDieAnzahlAnMilch(self.clickCount,self.x,self.y)
@@ -63,7 +63,7 @@ function zeichneMilch(x,y,r)
 end
 
 function zeichneKuh(xKuh,yKuh,kuhBild)
-    love.graphics.draw(kuhBild,xKuh,yKuh)
+    love.graphics.draw(kuhBild,xKuh,yKuh,0,2)
 end
 
 return kuh
