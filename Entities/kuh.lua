@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
- local kuh={} 
+local kuh={} 
     kuh.type = "kuh"
     kuh.x=300
     kuh.y=300
@@ -8,14 +7,10 @@
     kuh.body = love.physics.newBody(World,kuh.x,kuh.y, "dynamic")
     kuh.shape = love.physics.newCircleShape(16)
     kuh.fixture = love.physics.newFixture(kuh.body,kuh.shape)
-<<<<<<< Updated upstream
     kuh.isMelking = false
     kuh.clickCount=0
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
-    
-=======
 
-=======
 local kuh={
     x=0,
     y=0,
@@ -25,8 +20,6 @@ local kuh={
     shape = love.physics.newCircleShape(16),
     fixture = love.physics.newFixture(kuh.body,kuh.shape)
 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 function kuh:load()
     

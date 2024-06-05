@@ -37,7 +37,6 @@ function platziereGehege(x,y)
         spawnEntitaet("gehege")     
     end
 end
-
 function findEntityByType(typ)
     for i, v in ipairs(Entitaeten) do
         if v.type == typ then
