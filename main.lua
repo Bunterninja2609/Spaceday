@@ -1,3 +1,4 @@
+require "startscreen"
 function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
@@ -6,6 +7,7 @@ function love.load()
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
+    startscreen.load()
 end
 
 function love.draw()
@@ -13,6 +15,7 @@ function love.draw()
    for i,v in ipairs(Entitaeten) do 
     v:draw()
    end
+   startscreen.draw()
 end
 
 function love.update(dt)
