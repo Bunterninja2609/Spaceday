@@ -9,6 +9,7 @@ local spieler={}
     spieler.fixture = love.physics.newFixture(spieler.body,spieler.shape)
 
 function spieler:load()
+    
 end
 
 function spieler:update(dt)
@@ -19,6 +20,16 @@ end
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
     zeichneSpieler(self.x,self.y,15)
+
+    local inventar = {
+        geld = 0,
+        milch = 0,
+        fleisch = 0
+    }
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print("Geld: " .. inventar.geld, 10, 30)
+    love.graphics.print("Milch: " .. inventar.milch, 10, 50)
+    love.graphics.print("Fleisch: " .. inventar.fleisch, 10, 70)
 end
 function zeichneSpieler(x,y,r)
     love.graphics.setColor(1,1,0)
@@ -40,4 +51,6 @@ function bewegeSpieler(speed,body)
     end
     body:setLinearVelocity(speedX,speedY)
 end
+
+
 return spieler
