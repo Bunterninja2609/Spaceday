@@ -28,6 +28,8 @@ function spawnEntitaet(typ, x, y) --für position
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
     end
+    entitaet.x = x
+    entitaet.y = y
    -- entitaet.body:setX(x)
    -- entitaet.body:setY(y) --wäre eine möglichkeit
     entitaet: load()
