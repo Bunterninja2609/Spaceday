@@ -22,13 +22,14 @@ function love.update(dt)
     World:update(dt)
 end
 
-function spawnEntitaet(typ --[[, x, y]]) --für position
+function spawnEntitaet(typ, x, y) --für position
     local vorlageEntitaet=require("Entities/"..typ)
     local entitaet={}
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
     end
-    --entitaet.x, entitaet.y = x, y wäre eine möglichkeit
+    entitaet.x, entitaet.y = x, y --wäre eine möglichkeit
+    entitaet: load()
     table.insert(Entitaeten,entitaet)
 end
 
@@ -60,8 +61,9 @@ end
 
 function platziereWeizen(x,y)
     if true then
-        spawnEntitaet("weizen")     
+        spawnEntitaet("weizen",math.floor(x/16)*16,math.floor(y/16)*16)    
     end
+
 end  
      
 function love.keypressed(key)
