@@ -29,6 +29,7 @@ function spawnEntitaet(typ, x, y) --für position
      entitaet[key]=value
     end
     entitaet.x, entitaet.y = x, y --wäre eine möglichkeit
+    entitaet: load()
     table.insert(Entitaeten,entitaet)
 end
 
@@ -60,8 +61,9 @@ end
 
 function platziereWeizen(x,y)
     if true then
-        spawnEntitaet("weizen")     
+        spawnEntitaet("weizen",math.floor(x/16)*16,math.floor(y/16)*16)    
     end
+
 end  
      
 function love.keypressed(key)
