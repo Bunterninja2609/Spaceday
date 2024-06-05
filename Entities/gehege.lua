@@ -2,10 +2,11 @@ local gehege={}
     --gehege.type = "gehege"
     gehege.x=0
     gehege.y=0
-    gehege.body=love.physics.newBody(World,gehege.x,gehege.y,"static")
-    gehege.shape = love.physics.newRectangleShape(16, 16)
-    gehege.fixture=love.physics.newFixture(gehege.body,gehege.shape)
+    
 function gehege:load()
+    self.body=love.physics.newBody(World,self.x,self.y,"static")
+    self.shape = love.physics.newRectangleShape(16, 16)
+    self.fixture=love.physics.newFixture(self.body,self.shape)
 end
 
 function gehege:update(dt)
