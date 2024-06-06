@@ -4,16 +4,15 @@ local kuh={}
     kuh.y=300
     kuh.speed=10
     kuh.direction=math.random()*2*math.pi
-    kuh.body = love.physics.newBody(World,kuh.x,kuh.y, "dynamic")
-    kuh.shape = love.physics.newCircleShape(16)
-    kuh.fixture = love.physics.newFixture(kuh.body,kuh.shape)
     kuh.isMelking = false
     kuh.clickCount=0
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
 
 
 function kuh:load()
-    
+    kuh.body = love.physics.newBody(World,kuh.x,kuh.y, "dynamic")
+    kuh.shape = love.physics.newCircleShape(16)
+    kuh.fixture = love.physics.newFixture(kuh.body,kuh.shape)
 end
 
 function kuh:update(dt)

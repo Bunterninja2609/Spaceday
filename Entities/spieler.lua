@@ -4,11 +4,13 @@ local spieler={}
     spieler.y=100
     spieler.speed=100
     spieler.direction=1
+   
+
+function spieler:load()
     spieler.body = love.physics.newBody(World,spieler.x,spieler.y, "dynamic")
     spieler.shape = love.physics.newCircleShape(16)
     spieler.fixture = love.physics.newFixture(spieler.body,spieler.shape)
-
-function spieler:load()
+    
     spieler.inventar = {
         geld = 0,
         milch = 0,

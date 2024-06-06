@@ -4,13 +4,12 @@ local schwein={}
     schwein.y=300
     schwein.speed=10
     schwein.direction=math.random()*2*math.pi
+   
+
+function schwein:load()
     schwein.body = love.physics.newBody(World,schwein.x,schwein.y, "dynamic")
     schwein.shape = love.physics.newCircleShape(16)
     schwein.fixture = love.physics.newFixture(schwein.body,schwein.shape)
-
-
-function schwein:load()
-    
 end
 
 function schwein:update(dt)
