@@ -7,9 +7,9 @@ local schwein={}
    
 
 function schwein:load()
-    schwein.body = love.physics.newBody(World,schwein.x,schwein.y, "dynamic")
+    schwein.body = love.physics.newBody(World,self.x,self.y, "dynamic")
     schwein.shape = love.physics.newCircleShape(16)
-    schwein.fixture = love.physics.newFixture(schwein.body,schwein.shape)
+    schwein.fixture = love.physics.newFixture(self.body,self.shape)
 end
 
 function schwein:update(dt)
