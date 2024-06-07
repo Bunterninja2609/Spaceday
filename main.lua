@@ -25,20 +25,20 @@ function love.update(dt)
     World:update(dt)
 end
 
-function spawnEntitaet(typ, x, y) --für position
+function spawnEntitaet(typ, x, y) 
     local vorlageEntitaet=require("Entities/"..typ)
     local entitaet={}
     for key,value in pairs(vorlageEntitaet) do
      entitaet[key]=value
     end
-    entitaet.x, entitaet.y = x, y --wäre eine möglichkeit
+    entitaet.x, entitaet.y = x, y 
     entitaet: load()
     table.insert(Entitaeten,entitaet)
 end
 
 function platziereGehege(x,y)
     if true then
-        spawnEntitaet("gehege")     
+        spawnEntitaet("gehege", x, y)     
     end
 end
 function findEntityByType(typ)

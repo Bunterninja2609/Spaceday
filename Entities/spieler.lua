@@ -7,9 +7,9 @@ local spieler={}
    
 
 function spieler:load()
-    spieler.body = love.physics.newBody(World,self.x,self.y, "dynamic")
-    spieler.shape = love.physics.newCircleShape(16)
-    spieler.fixture = love.physics.newFixture(self.body,self.shape)
+    self.body = love.physics.newBody(World,self.x,self.y, "dynamic")
+    self.shape = love.physics.newCircleShape(16)
+    self.fixture = love.physics.newFixture(self.body,self.shape)
     
     spieler.inventar = {
         geld = 0,
