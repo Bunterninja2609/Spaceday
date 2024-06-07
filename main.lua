@@ -7,6 +7,7 @@ function love.load()
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
+    spawnEntitaet("schwein")
     startscreen.load()
 end
 
@@ -53,7 +54,7 @@ function love.mousepressed(x,y,button)
     if button == 1 then
         local kuh = findEntityByType("kuh")
         if kuh then
-            kuh:IsClicked(x, y)
+            kuh:IsClickedMilch(x, y)
         end
         platziereGehege(x,y) 
     end
