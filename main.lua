@@ -9,14 +9,17 @@ function love.load()
     spawnEntitaet("weizen")
     spawnEntitaet("schwein")
     startscreen.load()
+
 end
 
 function love.draw()
+    boden()
     love.graphics.setBackgroundColor(58/256, 68/256, 102/256)
    for i,v in ipairs(Entitaeten) do 
     v:draw()
    end
    startscreen.draw()
+
 end
 
 function love.update(dt)
@@ -52,15 +55,16 @@ end
 
 function love.mousepressed(x,y,button) 
     if button == 1 then
-        local kuh = findEntityByType("kuh")
-        if kuh then
-            kuh:IsClickedMilch(x, y)
-        end
+      --  local kuh = findEntityByType("kuh")
+       -- if kuh then
+       --     kuh:IsClickedMilch(x, y)
+       -- end
         platziereGehege(x,y) 
     end
     if button == 2 then
-        platziereWeizen(x,y)
-    end 
+        platziereWeizen(x,y)   
+    end
+
 end
 
 function platziereWeizen(x,y)
@@ -69,6 +73,19 @@ function platziereWeizen(x,y)
     end
 
 end  
+
+function boden()
+   local boden=love.graphics.newImage("Textures/boden.png")
+   local bildschirmBreite=love.graphics.getWidth()
+   local bildschirmHoehe= love.graphics.getHeight()
+   local bodenBreite= boden:getWidth()
+   local bodenHoehe = boden:getHeight()
+    for x=0,bildschirmBreite,bodenBreite do
+      for y=0, bildschirmHoehe,bodenHoehe do
+        love.graphics.draw(boden,x,y)
+      end
+    end
+end
      
 function love.keypressed(key)
     if szene == 1 then 
