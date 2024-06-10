@@ -8,13 +8,14 @@ function love.load()
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
     spawnEntitaet("schwein")
+    removeDeadEntities(kuehe)   
+    removeDeadEntities(schweine)
     startscreen.load()
 
 end
 
 function love.draw()
     boden()
-    love.graphics.setBackgroundColor(58/256, 68/256, 102/256)
    for i,v in ipairs(Entitaeten) do 
     v:draw()
    end
@@ -45,6 +46,7 @@ function platziereGehege(x,y)
         spawnEntitaet("gehege", x, y)     
     end
 end
+
 function findEntityByType(typ)
     for i, v in ipairs(Entitaeten) do
         if v.type == typ then
@@ -73,6 +75,15 @@ function platziereWeizen(x,y)
     end
 
 end  
+
+function removeDeadEntities(entities)
+    for i = #entities, 1, -1 do
+        local entity = entities[i]
+        if entity.IsAlive == false then
+            table.remove(entities, i)
+        end
+    end
+end
 
 function boden()
    local boden=love.graphics.newImage("Textures/boden.png")

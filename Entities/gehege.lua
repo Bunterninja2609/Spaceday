@@ -20,6 +20,7 @@ end
 function zeichneGehege(x,y,w,h)
     love.graphics.setColor(1,1,0)
     love.graphics.rectangle("fill",x,y,w,h)
+    love.graphics.setColor(1,1,1)-- damit der boden nicht übermalt wird
 end
 
 return gehege

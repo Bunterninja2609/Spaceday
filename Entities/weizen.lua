@@ -46,6 +46,7 @@ end
 function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen)
      love.graphics.setColor(fa1,fa2,fa3)
      love.graphics.rectangle("fill",xweizen,yweizen,16,16)
+     love.graphics.setColor(1,1,1)-- damit der boden nicht übermalt wird
 end
 
 return weizen
