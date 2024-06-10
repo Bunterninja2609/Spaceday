@@ -3,11 +3,17 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    spawnEntitaet("kuh")
+    for i = 1, 3 do
+        spawnEntitaet("kuh", love.math.random(100, 700), love.math.random(100, 500))
+    end
+    for i = 1, 3 do
+        spawnEntitaet("schwein", love.math.random(100, 700), love.math.random(100, 500))
+    end
+
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
-    spawnEntitaet("schwein")
+
     removeDeadEntities(kuehe)   
     removeDeadEntities(schweine)
     startscreen.load()
@@ -20,7 +26,6 @@ function love.draw()
     v:draw()
    end
    startscreen.draw()
-
 end
 
 function love.update(dt)
@@ -86,17 +91,20 @@ function removeDeadEntities(entities)
 end
 
 function boden()
-   local boden=love.graphics.newImage("Textures/boden.png")
-   local bildschirmBreite=love.graphics.getWidth()
-   local bildschirmHoehe= love.graphics.getHeight()
-   local bodenBreite= boden:getWidth()
-   local bodenHoehe = boden:getHeight()
-    for x=0,bildschirmBreite,bodenBreite do
-      for y=0, bildschirmHoehe,bodenHoehe do
-        love.graphics.draw(boden,x,y)
-      end
-    end
-end
+    local boden=love.graphics.newImage("Textures/boden.png")
+    local bildschirmBreite=love.graphics.getWidth()
+    local bildschirmHoehe= love.graphics.getHeight()
+    local bodenBreite= boden:getWidth()
+    local bodenHoehe = boden:getHeight()
+     for x=0,bildschirmBreite,bodenBreite do
+       for y=0, bildschirmHoehe,bodenHoehe do
+         love.graphics.draw(boden,x,y)
+       end
+     end
+ end
+ 
+
+
      
 function love.keypressed(key)
     if szene == 1 then 
