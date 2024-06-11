@@ -31,7 +31,10 @@ function weizen:update(dt)
         end
     end
     --ich wollte erst ernten wenn die Farbe sich nicht mehr verändert eigentlich müsste sich ja alles bedingen aber das hat nicht funktioniert deshalb habe ich elseif benutzt
-    --wobei ich eher vermute, dass der Fehler bei ernten an sich liegt
+    --wobei ich eher vermute, dass der Fehler bei ernten an sich liegt 
+
+    --!! Die Farben sind nie genau diese zahlen. anstattt == zu benutzen, benutze lieber >= und/oder <= !!--
+
     if self.farbeGruen == 165 --[[and self.farbeBlau == 32 and self.farbeRot == 218]] then
         self:ernten()
     elseif self.farbeBlau == 32 then
@@ -60,7 +63,7 @@ end
 
 function weizen:ernten()
     self.x,self.y = self.body:getPosition()
-    if spieler.x> self.x -16 and spieler.x < self.x +32 and spieler.y> self.y -16 and spieler.y<self.y +32 and love.keyboard.isDown("p") then
+    if spieler.x> self.x -16 and spieler.x < self.x +32 and spieler.y> self.y -16 and spieler.y<self.y +32 and love.keyboard.isDown("p") then 
         spieler.inventar.weizen= spieler.inventar.weizen+1
         self.wachsTimer=0
     end
@@ -72,6 +75,8 @@ oder ob es da eine andere Technik gibt.
 Zusätzlich soll das nur passieren wenn man auch wirklich "p" drückt (nicht "q" weil sich dann die Kuh löscht). das habe ich auch in die if-Schelife geschrieben.
 Wenn es die bedingungen erfüllt sollte der Inventar weizen +1 rechnen und den WachsTimer zurück auf null setzten, was meiner Meinung nach auch die Farbe zurück setzt.
 ]]
+--!! nimm lieber den satz des pythagoras !!--
 
 --und noch eine andere Anmerkung. Im Moment kann man mehrere Weizen übereinander platzieren, soll das so? oder soll ich das nochmal verändern?
+--!! Darum kümmern wir uns wenn wir den ganzen rest fertig haben. !!--
 return weizen
