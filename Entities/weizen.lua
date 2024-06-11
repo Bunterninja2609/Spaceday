@@ -7,6 +7,8 @@ local weizen={}
     weizen.farbeGruen = 205
     weizen.farbeBlau = 50
     weizen.farbeRot = 154
+
+    weizen.distance = 0
     --weizen.farbe = {154/255,205/255,50/255} Anfang
     --weizen.farbe = {218/255,165/255,32/255} Ende
    
@@ -35,11 +37,11 @@ function weizen:update(dt)
 
     --!! Die Farben sind nie genau diese zahlen. anstattt == zu benutzen, benutze lieber >= und/oder <= !!--
 
-    if self.farbeGruen == 165 --[[and self.farbeBlau == 32 and self.farbeRot == 218]] then
+    if self.farbeGruen <= 165 --[[and self.farbeBlau == 32 and self.farbeRot == 218]] then
         self:ernten()
-    elseif self.farbeBlau == 32 then
+    elseif self.farbeBlau <= 32 then
         self:ernten()
-    elseif self.farbeRot == 218 then
+    elseif self.farbeRot >= 218 then
         self:ernten()
     end
 
@@ -53,6 +55,7 @@ function weizen:draw()
     love.graphics.print(self.wachsTimer,600,600)
     love.graphics.print(self.farbeBlau,600,500)
     love.graphics.print(self.farbeRot,600,400)
+    love.graphics.print(self.distance,600,700)
 end
 
 function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen)
@@ -63,7 +66,8 @@ end
 
 function weizen:ernten()
     self.x,self.y = self.body:getPosition()
-    if spieler.x> self.x -16 and spieler.x < self.x +32 and spieler.y> self.y -16 and spieler.y<self.y +32 and love.keyboard.isDown("p") then 
+    self.distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
+    if self.distance < 80 and love.keyboard.isDown("e") then 
         spieler.inventar.weizen= spieler.inventar.weizen+1
         self.wachsTimer=0
     end
