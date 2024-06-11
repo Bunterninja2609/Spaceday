@@ -13,9 +13,9 @@ function love.load()
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
-
-    removeDeadEntities(kuehe)   
-    removeDeadEntities(schweine)
+    spawnEntitaet("schwein")
+    --removeDeadEntities(kuehe)   
+    --removeDeadEntities(schweine)
     startscreen.load()
 
 end
@@ -48,7 +48,7 @@ end
 
 function platziereGehege(x,y)
     if true then
-        spawnEntitaet("gehege", x, y)     
+        spawnEntitaet("gehege", math.floor(x/16)*16, math.floor(y/16)*16)     
     end
 end
 
@@ -85,6 +85,7 @@ function removeDeadEntities(entities)
     for i = #entities, 1, -1 do
         local entity = entities[i]
         if entity.IsAlive == false then
+            
             table.remove(entities, i)
         end
     end

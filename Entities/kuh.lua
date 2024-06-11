@@ -19,11 +19,7 @@ local kuh={}
         isMelking = false,
         IsAlive = true,
         kuhBild = love.graphics.newImage("Textures/kuh.png")
-        }
-        -- Insert new cow into the cows table
-        table.insert(kuehe,newCow)
-    end
-    
+     }
 
 
 function kuh:load()
@@ -86,7 +82,8 @@ function kuh:Schlachten(dt)
 end
 
 function kuh:checkForBreeding()
-    for i, cow1 in ipairs(kuehe) do
+    --[[
+        for i, cow1 in ipairs(kuehe) do
         for j, cow2 in ipairs(kuehe) do
             if i ~= j and cow1.IsAlive and cow2.IsAlive then
                 local distance = math.sqrt((cow1.x - cow2.x) ^ 2 + (cow1.y - cow2.y) ^ 2)
@@ -96,6 +93,9 @@ function kuh:checkForBreeding()
             end
         end
     end
+    --]]
+
+    --der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann.
 end
 
 function kuh:checkObWeizenGegeben(cow1, cow2)
