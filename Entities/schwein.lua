@@ -28,7 +28,7 @@ function schwein:update(dt)
     if self.IsAlive == true then
     self:Schlachten()
     bewegeSchwein(self,self.speed)
-    self:checkForBreeding()
+  --  self:checkForBreeding()
     
     end
 end

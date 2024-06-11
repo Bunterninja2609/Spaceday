@@ -17,7 +17,6 @@ function love.load()
     --removeDeadEntities(kuehe)   
     --removeDeadEntities(schweine)
     startscreen.load()
-
 end
 
 function love.draw()
@@ -31,6 +30,10 @@ end
 function love.update(dt)
     for i,v in ipairs(Entitaeten) do 
         v:update(dt)
+        local kuh = findEntityByType("kuh")
+         if kuh then
+           kuh:checkForBreeding(Entitaeten)
+       end
     end
     World:update(dt)
 end
@@ -103,9 +106,6 @@ function boden()
        end
      end
  end
- 
-
-
      
 function love.keypressed(key)
     if szene == 1 then 

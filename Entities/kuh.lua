@@ -20,6 +20,8 @@ local kuh={}
         IsAlive = true,
         kuhBild = love.graphics.newImage("Textures/kuh.png")
      }
+     return newCow 
+    end
 
 
 function kuh:load()
@@ -33,7 +35,7 @@ function kuh:update(dt)
      self:bewegeKuh(self,dt)
      self:Schlachten(dt)
      self:Melken()
-     self:checkForBreeding()
+    -- self:checkForBreeding()
     end
 end
 
@@ -81,19 +83,19 @@ function kuh:Schlachten(dt)
      end
 end
 
-function kuh:checkForBreeding()
-    --[[
-        for i, cow1 in ipairs(kuehe) do
-        for j, cow2 in ipairs(kuehe) do
-            if i ~= j and cow1.IsAlive and cow2.IsAlive then
-                local distance = math.sqrt((cow1.x - cow2.x) ^ 2 + (cow1.y - cow2.y) ^ 2)
-                if distance < 100 then
-                    self:checkObWeizenGegeben(cow1, cow2)
+function kuh:checkForBreeding(entities)
+    for i, entity1 in ipairs(entities) do
+        if entity1.type == "kuh" and entity1.IsAlive then
+            for j, entity2 in ipairs(entities) do
+                if i ~= j and entity2.type == "cow" and entity2.IsAlive then
+                 local distance = math.sqrt((entity1.x - entity2.x) ^ 2 + (entity1.y - entity2.y) ^ 2)
+                  if distance < 100 then
+                    self:checkObWeizenGegeben(entity1, entity2)
+                  end
                 end
             end
         end
     end
-    --]]
 
     --der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann.
 end
