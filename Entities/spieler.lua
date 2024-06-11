@@ -1,9 +1,10 @@
 spieler={}
     --spieler.type = "spieler"
-    spieler.x=100
-    spieler.y=100
+    spieler.x=300
+    spieler.y=300
     spieler.speed=100
     spieler.direction=1
+    spieler.spielerBild = love.graphics.newImage("Textures/spieler.png")
     
    
 function spieler:load()
@@ -20,22 +21,22 @@ function spieler:load()
 end
 
 function spieler:update(dt)
- --   self.body:setLinearVelocity(math.cos(self.direction)*self.speed,math.sin(self.direction)*self.speed)
     bewegeSpieler(self.speed,self.body)
 end
 
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
-    zeichneSpieler(self.x,self.y,15)
     zeichneInventar()
     zeichneShop()
+    local xNeu =  self.spielerBild:getWidth()
+    local yNeu =  self.spielerBild:getHeight()
+    zeichneSpieler(self.x-xNeu,self.y-yNeu,self.spielerBild)
 end
-function zeichneSpieler(x,y,r)
-    love.graphics.setColor(1,1,0)
-    love.graphics.circle("fill",x,y,r)
+function zeichneSpieler(x,y,spielerBild)
+    love.graphics.setColor(1,1,1)
+    love.graphics.draw(spieler.spielerBild,x,y,0,2)
 end
 function zeichneInventar()
-    love.graphics.rectangle("fill",50,200,50,50)
     love.graphics.setColor(1, 1, 1)
     love.graphics.print("Geld: " .. spieler.inventar.geld, 10, 30)
     love.graphics.print("Milch: " .. spieler.inventar.milch, 10, 50)

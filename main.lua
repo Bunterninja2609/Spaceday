@@ -23,8 +23,10 @@ function love.draw()
 end
 
 function love.update(dt)
+   
     for i,v in ipairs(Entitaeten) do 
-        v:update(dt)
+        v:update(dt) 
+        screenNichtVerlassen(v)
     end
     World:update(dt)
 end
@@ -124,4 +126,21 @@ function love.keypressed(key)
             end
         end
     end
+end
+
+function screenNichtVerlassen(entitaet)
+    local screenWidth = love.graphics.getWidth()
+    local screenHeight = love.graphics.getHeight()
+    local x, y = entitaet.body:getPosition()
+    if x < 0 then
+        x = screenWidth
+    elseif x > screenWidth then
+        x = 0
+    end
+    if y < 0 then
+        y = screenHeight
+    elseif y > screenHeight then
+        y = 0
+    end
+    entitaet.body:setPosition(x, y)
 end
