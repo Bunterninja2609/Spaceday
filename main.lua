@@ -104,4 +104,24 @@ function love.keypressed(key)
             szene = 2 
         end 
     end
+    if szene == 2 then
+        if key == "1" then
+            if spieler.inventar.milch > 0 then
+                spieler.inventar.milch = spieler.inventar.milch - 1
+                spieler.inventar.geld = spieler.inventar.geld + 10
+            end
+        end
+        if key == "2" then
+            if spieler.inventar.fleisch > 0 then
+                spieler.inventar.fleisch = spieler.inventar.fleisch - 1
+                spieler.inventar.geld = spieler.inventar.geld + 20
+            end
+        end
+        if key == "3" then
+            if spieler.inventar.weizen > 0 then
+                spieler.inventar.weizen = spieler.inventar.weizen - 1
+                spieler.inventar.geld = spieler.inventar.geld + 5
+            end
+        end
+    end
 end

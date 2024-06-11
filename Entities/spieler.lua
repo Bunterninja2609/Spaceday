@@ -12,10 +12,10 @@ function spieler:load()
     self.fixture = love.physics.newFixture(self.body,self.shape)
     spieler.inventar = {
         geld = 0,
-        milch = 0,
-        fleisch = 0,
-        gehege = 0,
-        weizen = 0
+        milch = 5,
+        fleisch = 5,
+        gehege = 5,
+        weizen = 5
     }
 end
 
@@ -27,7 +27,15 @@ end
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
     zeichneSpieler(self.x,self.y,15)
-
+    zeichneInventar()
+    zeichneShop()
+end
+function zeichneSpieler(x,y,r)
+    love.graphics.setColor(1,1,0)
+    love.graphics.circle("fill",x,y,r)
+end
+function zeichneInventar()
+    love.graphics.rectangle("fill",50,200,50,50)
     love.graphics.setColor(1, 1, 1)
     love.graphics.print("Geld: " .. spieler.inventar.geld, 10, 30)
     love.graphics.print("Milch: " .. spieler.inventar.milch, 10, 50)
@@ -35,9 +43,14 @@ function spieler:draw()
     love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 90)
     love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 110)
 end
-function zeichneSpieler(x,y,r)
-    love.graphics.setColor(1,1,0)
-    love.graphics.circle("fill",x,y,r)
+function zeichneShop()
+    love.graphics.setColor(0.5, 0.5, 0.5)
+    love.graphics.rectangle("fill", 10, 140, 200, 100)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print("Shop:", 20, 150)
+    love.graphics.print("1. Milch verkaufen (+10 Geld)", 20, 170)
+    love.graphics.print("2. Fleisch verkaufen (+20 Geld)", 20, 190)
+    love.graphics.print("3. Weizen verkaufen (+5 Geld)", 20, 210)
 end
 
 function bewegeSpieler(speed,body)
@@ -55,6 +68,4 @@ function bewegeSpieler(speed,body)
     end
     body:setLinearVelocity(speedX,speedY)
 end
-
-
 return spieler
