@@ -70,6 +70,14 @@ function love.mousepressed(x,y,button)
     if button == 2 then
         platziereWeizen(x,y)   
     end
+    if button == 2 then
+        for i, v in ipairs(Entitaeten) do
+            if v.type == "gehege" then
+                v.IsAlive = false
+            end
+        end
+    end
+
 
 end
 
