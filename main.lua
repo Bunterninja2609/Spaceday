@@ -1,5 +1,6 @@
 require "startscreen"
 function love.load()
+    love.graphics.setDefaultFilter("nearest","nearest")
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
