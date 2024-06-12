@@ -95,8 +95,6 @@ function love.mousepressed(x,y,button)
             end
         end
     end
-
-
 end
 
 function platziereWeizen(x,y)
