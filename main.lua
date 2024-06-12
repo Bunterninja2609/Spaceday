@@ -46,8 +46,22 @@ function spawnEntitaet(typ, x, y)
 end
 
 function platziereGehege(x,y)
-    if true then
-        spawnEntitaet("gehege", math.floor(x/16)*16, math.floor(y/16)*16)     
+    local canPlace = true
+
+    for i,v in ipairs(Entitaeten) do 
+        if v.type== "weizen" then 
+            if v.x ==  math.floor(x/16)*16 and v.y == math.floor(y/16)*16 then
+                canPlace = false
+            end
+        end
+    end 
+    if canPlace == true then
+        spawnEntitaet("gehege", math.floor(x/16)*16, math.floor(y/16)*16)
+        if spieler.inventar.geld < 5 then
+            spieler.inventar.weizen = spieler.inventar.weizen -2
+        elseif spieler.inventar.geld >= 5 then
+            spieler.inventar.geld = spieler.inventar.geld-5
+        end
     end
 end
 

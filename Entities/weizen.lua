@@ -11,6 +11,8 @@ local weizen={}
     weizen.distance = 0
     --weizen.farbe = {154/255,205/255,50/255} Anfang
     --weizen.farbe = {218/255,165/255,32/255} Ende
+
+    weizen.weizenBild = love.graphics.newImage("Textures/weizen.png")
    
 function weizen:load()
     self.body = love.physics.newBody(World,self.x,self.y, "static")
@@ -60,16 +62,16 @@ function weizen:draw()
     ]]--
 end
 
-function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen)
+function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen,weizenBild)
      love.graphics.setColor(fa1,fa2,fa3)
-     love.graphics.rectangle("fill",xweizen,yweizen,16,16)
+     ove.graphics.draw(weizenBild,xweizen,yweizen,0,2)
      love.graphics.setColor(1,1,1)-- damit der boden nicht übermalt wird
 end
 
 function weizen:ernten()
     self.x,self.y = self.body:getPosition()
     self.distance = love.physics.getDistance(spieler.fixture,self.fixture)
-    if self.distance < 250 and love.keyboard.isDown("e") then 
+    if self.distance < 64 and love.keyboard.isDown("e") then 
         spieler.inventar.weizen= spieler.inventar.weizen+1
         self.wachsTimer=0
         self.farbeGruen = 205
