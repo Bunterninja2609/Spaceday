@@ -7,6 +7,7 @@ local kuh={}
     kuh.isMelking = false
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
     kuh.IsAlive=true
+    kuh.timer=0
     kuehe={}
 
    function kuh:neue(x,y)
@@ -32,10 +33,9 @@ end
 
 function kuh:update(dt)
     if self.IsAlive== true then
-     self:bewegeKuh(self,dt)
-     self:Schlachten(dt)
-     self:Melken()
-    -- self:checkForBreeding()
+     bewegeKuh(self,self.speed)
+     self:Schlachten()
+     self:Melken(dt)
     end
 end
 
@@ -51,12 +51,13 @@ function kuh:bewegeKuh(kuh,dt)
    end
 end
 
-function kuh:Melken()
+function kuh:Melken(dt)
     self.x,self.y = self.body:getPosition()
-    local distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
-     if distance < 80 and love.keyboard.isDown("f")then
-        spieler.inventar.milch= spieler.inventar.milch+1
-        self.isMelking = true
+    local distance = love.physics.getDistance(self.fixture,spieler.fixture)
+     if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
+          self.timer=self.timer+dt
+          spieler.inventar.milch= spieler.inventar.milch+1
+          self.isMelking = true
     else
         self.isMelking = false
     end
@@ -76,28 +77,27 @@ end
 
 function kuh:Schlachten(dt)
     self.x,self.y = self.body:getPosition()
-    local distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
-     if distance < 80 and love.keyboard.isDown("q") then
+    local distance = love.physics.getDistance(self.fixture,spieler.fixture)
+     if distance < 32 and love.keyboard.isDown("q") then
         spieler.inventar.fleisch= spieler.inventar.fleisch+1
         self.IsAlive=false
      end
 end
 
-function kuh:checkForBreeding(entities)
-    for i, entity1 in ipairs(entities) do
-        if entity1.type == "kuh" and entity1.IsAlive then
-            for j, entity2 in ipairs(entities) do
-                if i ~= j and entity2.type == "cow" and entity2.IsAlive then
-                 local distance = math.sqrt((entity1.x - entity2.x) ^ 2 + (entity1.y - entity2.y) ^ 2)
-                  if distance < 100 then
-                    self:checkObWeizenGegeben(entity1, entity2)
-                  end
+function kuh:checkForBreeding(Entitaeten)
+        for i, entity1 in ipairs(Entitaeten) do
+        for j, entity2 in ipairs(Entitaeten) do
+            if i ~= j and entity1.IsAlive and entity2.IsAlive then
+                local distance = math.sqrt((entity1.x - entity2.x) ^ 2 + (entity1.y - entity2.y) ^ 2)
+                if distance < 50 then
+                    self:checkObWeizenGegeben(entity1,entity2)
                 end
             end
         end
     end
+   
 
-    --der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann.
+    --!! der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann. !!--
 end
 
 function kuh:checkObWeizenGegeben(cow1, cow2)
@@ -105,8 +105,8 @@ function kuh:checkObWeizenGegeben(cow1, cow2)
     cow2.x,cow2.y = cow2.body:getPosition()
     local distanceToPlayer1 = math.sqrt((cow1.x - spieler.x) ^ 2 + (cow1.y - spieler.y) ^ 2)
     local distanceToPlayer2 = math.sqrt((cow2.x - spieler.x) ^ 2 + (cow2.y - spieler.y) ^ 2)
-    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("r") then  
-        self:neue((cow1.x + cow2.x) / 2 + 20, (cow1.y + cow2.y) / 2 + 20)  
+    if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("w") then  
+        self:neue((cow1.x + cow2.x) / 2 + 20, (cow1.y + cow2.y) / 2 + 20)  --!! benutze spawnentitaet() !!--
     end
 end
 
