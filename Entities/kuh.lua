@@ -7,6 +7,7 @@ local kuh={}
     kuh.isMelking = false
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
     kuh.IsAlive=true
+    kuh.timer=0
     kuehe={}
 
    -- function kuh:neue(x,y)
@@ -34,7 +35,7 @@ function kuh:update(dt)
     if self.IsAlive== true then
      bewegeKuh(self,self.speed)
      self:Schlachten()
-     self:Melken()
+     self:Melken(dt)
     end
     --self:checkForBreeding()
 end
@@ -51,13 +52,14 @@ function bewegeKuh(kuh,speed,dt)
    end
 end
 
-function kuh:Melken()
+function kuh:Melken(dt)
     self.x,self.y = self.body:getPosition()
-    local distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
-     if distance < 80 and love.keyboard.isDown("f")then
-        spieler.inventar.milch= spieler.inventar.milch+1
-        self.isMelking = true
-       
+    local distance = love.physics.getDistance(self.fixture,spieler.fixture)
+     if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
+          self.timer=self.timer+dt
+          spieler.inventar.milch= spieler.inventar.milch+1
+          self.isMelking = true
+          
     else
         self.isMelking = false
     end
@@ -84,19 +86,18 @@ function kuh:Schlachten()
      end
 end
 
-function kuh:checkForBreeding()
-    --[[
-        for i, cow1 in ipairs(kuehe) do
-        for j, cow2 in ipairs(kuehe) do
-            if i ~= j and cow1.IsAlive and cow2.IsAlive then
-                local distance = math.sqrt((cow1.x - cow2.x) ^ 2 + (cow1.y - cow2.y) ^ 2)
+function kuh:checkForBreeding(Entitaeten)
+        for i, entity1 in ipairs(Entitaeten) do
+        for j, entity2 in ipairs(Entitaeten) do
+            if i ~= j and entity1.IsAlive and entity2.IsAlive then
+                local distance = math.sqrt((entity1.x - entity2.x) ^ 2 + (entity1.y - entity2.y) ^ 2)
                 if distance < 50 then
-                    self:checkObWeizenGegeben(cow1, cow2)
+                    self:checkObWeizenGegeben(entity1,entity2)
                 end
             end
         end
     end
-    --]]
+   
 
     --!! der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann. !!--
 end
