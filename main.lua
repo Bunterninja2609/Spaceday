@@ -23,10 +23,11 @@ function love.draw()
     v:draw()
    end
    startscreen.draw()
+   love.graphics.setFont(love.graphics.newFont("font.ttf"))
 end
 
 function love.update(dt)
-   
+    removeDeadEntities(Entitaeten)   
     for i,v in ipairs(Entitaeten) do 
         v:update(dt) 
         screenNichtVerlassen(v)
@@ -92,7 +93,7 @@ function removeDeadEntities(entities)
     for i = #entities, 1, -1 do
         local entity = entities[i]
         if entity.IsAlive == false then
-            
+            entity.fixture:destroy()        
             table.remove(entities, i)
         end
     end
@@ -102,11 +103,11 @@ function boden()
    local boden=love.graphics.newImage("Textures/boden.png")
    local bildschirmBreite=love.graphics.getWidth()
    local bildschirmHoehe= love.graphics.getHeight()
-   local bodenBreite= boden:getWidth()
-   local bodenHoehe = boden:getHeight()
+   local bodenBreite= boden:getWidth()*2
+   local bodenHoehe = boden:getHeight()*2
     for x=0,bildschirmBreite,bodenBreite do
       for y=0, bildschirmHoehe,bodenHoehe do
-        love.graphics.draw(boden,x,y)
+        love.graphics.draw(boden,x,y,0,2)
       end
     end
 end
@@ -118,22 +119,24 @@ function love.keypressed(key)
         end 
     end
     if szene == 2 then
-        if key == "1" then
-            if spieler.inventar.milch > 0 then
-                spieler.inventar.milch = spieler.inventar.milch - 1
-                spieler.inventar.geld = spieler.inventar.geld + 10
+        if spieler.nutzeShop == true then 
+            if key == "1" then
+                if spieler.inventar.milch > 0 then
+                    spieler.inventar.milch = spieler.inventar.milch - 1
+                    spieler.inventar.geld = spieler.inventar.geld + 10
+                end
             end
-        end
-        if key == "2" then
-            if spieler.inventar.fleisch > 0 then
-                spieler.inventar.fleisch = spieler.inventar.fleisch - 1
-                spieler.inventar.geld = spieler.inventar.geld + 20
+            if key == "2" then
+                if spieler.inventar.fleisch > 0 then
+                    spieler.inventar.fleisch = spieler.inventar.fleisch - 1
+                    spieler.inventar.geld = spieler.inventar.geld + 20
+                end
             end
-        end
-        if key == "3" then
-            if spieler.inventar.weizen > 0 then
-                spieler.inventar.weizen = spieler.inventar.weizen - 1
-                spieler.inventar.geld = spieler.inventar.geld + 5
+            if key == "3" then
+                if spieler.inventar.weizen > 0 then
+                    spieler.inventar.weizen = spieler.inventar.weizen - 1
+                    spieler.inventar.geld = spieler.inventar.geld + 5
+                end
             end
         end
     end
