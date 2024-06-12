@@ -10,7 +10,7 @@ spieler={}
 function spieler:load()
     self.body = love.physics.newBody(World,self.x,self.y, "dynamic")
     self.shape = love.physics.newCircleShape(16)
-    self.fixture = love.physics.newFixture(self.body,self.shape)
+    spieler.fixture = love.physics.newFixture(self.body,self.shape)
     spieler.inventar = {
         geld = 0,
         milch = 5,
