@@ -50,12 +50,13 @@ end
 function weizen:draw()
     self.x,self.y = self.body:getPosition( )
     zeichneWeizen(self.farbeRot/256,self.farbeGruen/256,self.farbeBlau/256,self.x,self.y) 
-    --Orientierung
+    --[[Orientierung
     love.graphics.print(self.farbeGruen,600,300)
     love.graphics.print(self.wachsTimer,600,600)
     love.graphics.print(self.farbeBlau,600,500)
     love.graphics.print(self.farbeRot,600,400)
     love.graphics.print(self.distance,600,700)
+    ]]--
 end
 
 function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen)
@@ -67,7 +68,7 @@ end
 function weizen:ernten()
     self.x,self.y = self.body:getPosition()
     self.distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
-    if self.distance < 80 and love.keyboard.isDown("e") then 
+    if self.distance < 1000 and love.keyboard.isDown("e") then 
         spieler.inventar.weizen= spieler.inventar.weizen+1
         self.wachsTimer=0
     end

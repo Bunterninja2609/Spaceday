@@ -98,7 +98,7 @@ function kuh:checkForBreeding()
     end
     --]]
 
-    --der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann.
+    --!! der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann. !!--
 end
 
 function kuh:checkObWeizenGegeben(cow1, cow2)
@@ -107,7 +107,7 @@ function kuh:checkObWeizenGegeben(cow1, cow2)
     local distanceToPlayer1 = math.sqrt((cow1.x - spieler.x) ^ 2 + (cow1.y - spieler.y) ^ 2)
     local distanceToPlayer2 = math.sqrt((cow2.x - spieler.x) ^ 2 + (cow2.y - spieler.y) ^ 2)
     if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("w") then  
-        self:neue((cow1.x + cow2.x) / 2 + 20, (cow1.y + cow2.y) / 2 + 20)  
+        self:neue((cow1.x + cow2.x) / 2 + 20, (cow1.y + cow2.y) / 2 + 20)  --!! benutze spawnentitaet() !!--
     end
 end
 
