@@ -27,7 +27,7 @@ function love.draw()
 end
 
 function love.update(dt)
-   
+    removeDeadEntities(Entitaeten)   
     for i,v in ipairs(Entitaeten) do 
         v:update(dt) 
         screenNichtVerlassen(v)
@@ -85,7 +85,7 @@ function removeDeadEntities(entities)
     for i = #entities, 1, -1 do
         local entity = entities[i]
         if entity.IsAlive == false then
-            
+            entity.fixture:destroy()        
             table.remove(entities, i)
         end
     end

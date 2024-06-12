@@ -77,8 +77,8 @@ end
 
 function kuh:Schlachten()
     self.x,self.y = self.body:getPosition()
-    local distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
-     if distance < 80 and love.keyboard.isDown("q") then
+    local distance = love.physics.getDistance(self.fixture,spieler.fixture)
+     if distance < 32 and love.keyboard.isDown("q") then
         spieler.inventar.fleisch= spieler.inventar.fleisch+1
         self.IsAlive=false
      end
