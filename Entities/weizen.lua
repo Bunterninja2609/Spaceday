@@ -16,6 +16,7 @@ function weizen:load()
     self.body = love.physics.newBody(World,self.x,self.y, "static")
     self.shape = love.physics.newRectangleShape(16,16)
     self.fixture = love.physics.newFixture(self.body,self.shape)
+    self.fixture:setMask(1)
 
 end
 
@@ -67,20 +68,17 @@ end
 
 function weizen:ernten()
     self.x,self.y = self.body:getPosition()
-    self.distance = math.sqrt((self.x- spieler.x)^2 + (self.y - spieler.y)^2)
-    if self.distance < 1000 and love.keyboard.isDown("e") then 
+    self.distance = love.physics.getDistance(spieler.fixture,self.fixture)
+    if self.distance < 250 and love.keyboard.isDown("e") then 
         spieler.inventar.weizen= spieler.inventar.weizen+1
         self.wachsTimer=0
+        self.farbeGruen = 205
+        self.farbeBlau = 50
+        self.farbeRot = 154
     end
 
 end
---[[ich wollte einmal, dass nur geerntet werden kann wenn man innerhalb eines 48*48 Feld um das weizen herum (also, dass das weizen in der mitte ist)steht
-dafür habe ich eigentlich die Daten am Anfang in der if-schleife ausgerechnet. ich bin mir aber nicht sicher ob man das wirklich durch "and" verknüpfen muss
-oder ob es da eine andere Technik gibt.
-Zusätzlich soll das nur passieren wenn man auch wirklich "p" drückt (nicht "q" weil sich dann die Kuh löscht). das habe ich auch in die if-Schelife geschrieben.
-Wenn es die bedingungen erfüllt sollte der Inventar weizen +1 rechnen und den WachsTimer zurück auf null setzten, was meiner Meinung nach auch die Farbe zurück setzt.
-]]
---!! nimm lieber den satz des pythagoras !!--
+
 
 --und noch eine andere Anmerkung. Im Moment kann man mehrere Weizen übereinander platzieren, soll das so? oder soll ich das nochmal verändern?
 --!! Darum kümmern wir uns wenn wir den ganzen rest fertig haben. !!--

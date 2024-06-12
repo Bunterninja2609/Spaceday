@@ -18,16 +18,18 @@ function spieler:load()
         gehege = 5,
         weizen = 5
     }
+    self.nutzeShop = false
 end
 
 function spieler:update(dt)
     bewegeSpieler(self.speed,self.body)
+    shopTaste()
 end
 
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
     zeichneInventar()
-    zeichneShop()
+    zeichneShop(1600,50)
     local xNeu =  self.spielerBild:getWidth()
     local yNeu =  self.spielerBild:getHeight()
     zeichneSpieler(self.x-xNeu,self.y-yNeu,self.spielerBild)
@@ -44,14 +46,16 @@ function zeichneInventar()
     love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 90)
     love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 110)
 end
-function zeichneShop()
-    love.graphics.setColor(0.5, 0.5, 0.5)
-    love.graphics.rectangle("fill", 10, 140, 200, 100)
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.print("Shop:", 20, 150)
-    love.graphics.print("1. Milch verkaufen (+10 Geld)", 20, 170)
-    love.graphics.print("2. Fleisch verkaufen (+20 Geld)", 20, 190)
-    love.graphics.print("3. Weizen verkaufen (+5 Geld)", 20, 210)
+function zeichneShop(x,y)
+    if spieler.nutzeShop == true then
+        love.graphics.setColor(0.5, 0.5, 0.5)
+        love.graphics.rectangle("fill", x, y, 400, 100)
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print("Shop:", x+10, y+10)
+        love.graphics.print("1. Milch verkaufen (+10 Geld)", x+10, y+30)
+        love.graphics.print("2. Fleisch verkaufen (+20 Geld)", x+10, y+50)
+        love.graphics.print("3. Weizen verkaufen (+5 Geld)", x+10, y+70)
+    end
 end
 
 function bewegeSpieler(speed,body)
@@ -68,5 +72,12 @@ function bewegeSpieler(speed,body)
         speedX = speed
     end
     body:setLinearVelocity(speedX,speedY)
+end
+function shopTaste()
+    if love.keyboard.isDown("r") then
+        spieler.nutzeShop = true
+    else
+        spieler.nutzeShop = false
+    end
 end
 return spieler
