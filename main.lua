@@ -4,15 +4,14 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    for i = 0, 100 do
-        spawnEntitaet("kuh")
-    end
+   -- for i = 0, 3 do
+       spawnEntitaet("kuh")
+       spawnEntitaet("kuh")
+    --send
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
     spawnEntitaet("schwein")
-    --removeDeadEntities(kuehe)   
-    --removeDeadEntities(schweine)
     startscreen.load()
 end
 
@@ -26,13 +25,12 @@ function love.draw()
 end
 
 function love.update(dt)
-    removeDeadEntities(Entitaeten)   
+    removeDeadEntities(Entitaeten)
     for i,v in ipairs(Entitaeten) do 
-        v:update(dt) 
-        local kuh = findEntityByType("kuh")
-         if kuh then
-           kuh:checkForBreeding(Entitaeten)
+        if v.type=="kuh" then
+           v:checkForBreeding(Entitaeten)
         end
+        v:update(dt) 
         screenNichtVerlassen(v)
     end
     World:update(dt)
@@ -79,10 +77,6 @@ end
 
 function love.mousepressed(x,y,button) 
     if button == 1 then
-      --  local kuh = findEntityByType("kuh")
-       -- if kuh then
-       --     kuh:IsClickedMilch(x, y)
-       -- end
         platziereGehege(x,y) 
     end
     if button == 2 then

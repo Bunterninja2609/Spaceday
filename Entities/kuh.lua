@@ -87,9 +87,10 @@ end
 function kuh:checkForBreeding(Entitaeten)
     for i, entity1 in ipairs(Entitaeten) do
         for j, entity2 in ipairs(Entitaeten) do
-            if i ~= j and entity1.type == "kuh" and entity2.type == "kuh" and entity1.IsAlive and entity2.IsAlive then
+            if entity1.type == "kuh" and entity2.type == "kuh" and entity1.IsAlive and entity2.IsAlive then
                 local distance = love.physics.getDistance(entity1.fixture,entity2.fixture)
-                if distance < 50 then
+                if distance < 400 then
+                    print("JA",300,300)
                     self:checkObWeizenGegeben(entity1, entity2)
                 end
             end
@@ -101,14 +102,14 @@ end
     --!! der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann. !!--
 
 
-function kuh:checkObWeizenGegeben(cow1, cow2)
-    cow1.x,cow1.y = cow1.body:getPosition()
-    cow2.x,cow2.y = cow2.body:getPosition()
-    local distanceToPlayer1 = math.sqrt((cow1.x - spieler.x) ^ 2 + (cow1.y - spieler.y) ^ 2)
-    local distanceToPlayer2 = math.sqrt((cow2.x - spieler.x) ^ 2 + (cow2.y - spieler.y) ^ 2)
-    if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("w") then  
-        spawnEntitaet("kuh",(cow1.x + cow2.x) / 2 + 20, (cow1.y + cow2.y) / 2 + 20)  --!! benutze spawnentitaet() !!--
-        love.graphics.print("JA",300,300)
+function kuh:checkObWeizenGegeben(entity1,entity2)
+    entity1.x,entity1.y = entity1.body:getPosition()
+    entity2.x,entity2.y = entity2.body:getPosition()
+    local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
+    local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
+    if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("r") then  
+        spawnEntitaet("kuh",(entity1.x + entity2.x) / 2 + 20, (entity1.y + entity2.y) / 2 + 20)  --!! benutze spawnentitaet() !!--
+        print("JA",300,300)
     end
 end
 

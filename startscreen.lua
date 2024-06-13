@@ -10,7 +10,11 @@ end
 function startscreen.draw()
     if szene == 1 then 
     love.graphics.setColor(1,1,1)
-    love.graphics.draw(start,startscreen.x,startscreen.y,0,8)
+    local bildschirmBreite, bildschirmHoehe = love.graphics.getDimensions()
+    local bildBreite, bildHoehe= start:getWidth(), start:getHeight()
+    local vergroesserX = bildschirmBreite / bildBreite
+    local vergroesserY = bildschirmHoehe / bildHoehe
+    love.graphics.draw(start,startscreen.x,startscreen.y,0,vergroesserX,vergroesserY)
     end
 end
 
