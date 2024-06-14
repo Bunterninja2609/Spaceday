@@ -4,14 +4,16 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-   -- for i = 0, 3 do
+    --for i = 0, 3 do
+      -- spawnEntitaet("kuh")
        spawnEntitaet("kuh")
-       spawnEntitaet("kuh")
-    --send
+   -- end
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
     spawnEntitaet("schwein")
+    spawnEntitaet("schwein")
+    spawnEntitaet("schaf")
     startscreen.load()
 end
 
@@ -27,8 +29,8 @@ end
 function love.update(dt)
     removeDeadEntities(Entitaeten)
     for i,v in ipairs(Entitaeten) do 
-        if v.type=="kuh" then
-           v:checkForBreeding(Entitaeten)
+        if v.type=="kuh" or v.type=="schwein"then
+          -- v:checkForBreeding(Entitaeten)
         end
         v:update(dt) 
         screenNichtVerlassen(v)
