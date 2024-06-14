@@ -35,12 +35,9 @@ function weizen:update(dt)
             self.farbeRot = self.farbeRot + 6.4 * dt
         end
     end
-    --ich wollte erst ernten wenn die Farbe sich nicht mehr verändert eigentlich müsste sich ja alles bedingen aber das hat nicht funktioniert deshalb habe ich elseif benutzt
-    --wobei ich eher vermute, dass der Fehler bei ernten an sich liegt 
+   
 
-    --!! Die Farben sind nie genau diese zahlen. anstattt == zu benutzen, benutze lieber >= und/oder <= !!--
-
-    if self.farbeGruen <= 165 --[[and self.farbeBlau == 32 and self.farbeRot == 218]] then
+    if self.farbeGruen <= 165 then
         self:ernten()
     elseif self.farbeBlau <= 32 then
         self:ernten()
@@ -52,7 +49,7 @@ end
 
 function weizen:draw()
     self.x,self.y = self.body:getPosition( )
-    zeichneWeizen(self.farbeRot/256,self.farbeGruen/256,self.farbeBlau/256,self.x,self.y) 
+    zeichneWeizen(self.farbeRot/256,self.farbeGruen/256,self.farbeBlau/256,self.x,self.y,self.weizenBild) 
     --[[Orientierung
     love.graphics.print(self.farbeGruen,600,300)
     love.graphics.print(self.wachsTimer,600,600)
@@ -63,8 +60,8 @@ function weizen:draw()
 end
 
 function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen,weizenBild)
-     love.graphics.setColor(fa1,fa2,fa3)
-     ove.graphics.draw(weizenBild,xweizen,yweizen,0,2)
+    love.graphics.setColor(fa1,fa2,fa3)
+     love.graphics.draw(weizenBild,xweizen,yweizen,0,2)
      love.graphics.setColor(1,1,1)-- damit der boden nicht übermalt wird
 end
 
@@ -82,6 +79,4 @@ function weizen:ernten()
 end
 
 
---und noch eine andere Anmerkung. Im Moment kann man mehrere Weizen übereinander platzieren, soll das so? oder soll ich das nochmal verändern?
---!! Darum kümmern wir uns wenn wir den ganzen rest fertig haben. !!--
 return weizen
