@@ -5,10 +5,10 @@ function love.load()
     love.physics.setMeter(32)
     Entitaeten={}
     for i = 0, 3 do
-       spawnEntitaet("kuh")
+       spawnEntitaet("kuh", 500, 300)
     end
     spawnEntitaet("gehege")
-    spawnEntitaet("spieler")
+    spawnEntitaet("spieler", 500, 50)
     spawnEntitaet("weizen")
     spawnEntitaet("schwein")
     for i =0,3 do
@@ -46,7 +46,7 @@ function spawnEntitaet(typ, x, y)
      entitaet[key]=value
     end
     entitaet.x, entitaet.y = x, y 
-    entitaet: load()
+    entitaet:load()
     table.insert(Entitaeten,entitaet)
 end
 

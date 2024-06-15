@@ -1,13 +1,14 @@
 local kuh={} 
     kuh.type = "kuh"
-    kuh.x=100
-    kuh.y=100
+    kuh.x=500
+    kuh.y=500
     kuh.speed=10
     kuh.direction=math.random()*2*math.pi
     kuh.isMelking = false
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
     kuh.IsAlive=true
     kuh.timer=0
+    kuh.breedTimer=0 --!! tmer, damit nicht die ganze zeit neue Kühe spawnen !!--
     kuehe={}
 
 
@@ -19,9 +20,11 @@ end
 
 function kuh:update(dt)
     if self.IsAlive== true then
+     self.breedTimer = self.breedTimer + dt
      self:bewegeKuh(self,dt)
      self:Schlachten()
      self:Melken(dt)
+     self:checkForBreeding(Entitaeten)
     end
 end
 
@@ -71,12 +74,12 @@ function kuh:Schlachten(dt)
      end
 end
 
-function kuh:checkForBreeding(Entitaeten)
-    for i, entity1 in ipairs(Entitaeten) do
-        for j, entity2 in ipairs(Entitaeten) do
+function kuh:checkForBreeding(t)
+    for i, entity1 in ipairs(t) do
+        for j, entity2 in ipairs(t) do
             if entity1.type == "kuh" and entity2.type == "kuh" and entity1.IsAlive and entity2.IsAlive then
                 local distance = love.physics.getDistance(entity1.fixture,entity2.fixture)
-                if distance < 200 then
+                if distance < 100 then
                     self:checkObWeizenGegeben(entity1, entity2)
                 end
             end
@@ -87,11 +90,13 @@ end
 function kuh:checkObWeizenGegeben(entity1,entity2)
     local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
     local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
-    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("h") then 
+    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("e") and entity1.breedTimer > 10 and entity2.breedTimer > 10 and spieler.inventar.weizen >= 4 then
         local newX = (entity1.x + entity2.x) / 2 + 20
         local newY = (entity1.y + entity2.y) / 2 + 20
-        spawnEntitaet("kuh",newX,newY) 
-        love.graphics.print("HALLO",200,300)
+        spawnEntitaet("kuh",newX,newY)
+        entity1.breedTimer = 0
+        entity2.breedTimer = 0
+        spieler.inventar.weizen = spieler.inventar.weizen - 4 --!!es kostet weizen !!--
     end
 end
 

@@ -13,10 +13,10 @@ function spieler:load()
     spieler.fixture = love.physics.newFixture(self.body,self.shape)
     spieler.inventar = {
         geld = 0,
-        milch = 5,
-        fleisch = 5,
-        gehege = 5,
-        weizen = 5
+        milch = 0,
+        fleisch = 0,
+        gehege = 20,
+        weizen = 20
     }
     self.nutzeShop = false
 end
