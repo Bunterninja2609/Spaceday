@@ -10,20 +10,6 @@ local kuh={}
     kuh.timer=0
     kuehe={}
 
-   function kuh:neue(x,y)
-     local newCow = {
-        x = x,
-        y = y,
-        body = love.physics.newBody(World, x, y, "dynamic"),
-        shape = love.physics.newCircleShape(16),
-        direction = math.random() * 2 * math.pi,
-        isMelking = false,
-        IsAlive = true,
-        kuhBild = love.graphics.newImage("Textures/kuh.png")
-     }
-     return newCow 
-    end
-
 
 function kuh:load()
    self.body = love.physics.newBody(World,self.x,self.y, "dynamic")
@@ -69,6 +55,7 @@ function kuh:draw()
     local xNeu =  self.kuhBild:getWidth()
     local yNeu =  self.kuhBild:getHeight()
     zeichneKuh(self.x-xNeu,self.y-yNeu,self.kuhBild)
+    --self:checkObWeizenGegeben(self,self)
      if self.isMelking == true then 
         zeichneMilch(self.x+30,self.y+30,10)
      end
@@ -89,29 +76,25 @@ function kuh:checkForBreeding(Entitaeten)
         for j, entity2 in ipairs(Entitaeten) do
             if entity1.type == "kuh" and entity2.type == "kuh" and entity1.IsAlive and entity2.IsAlive then
                 local distance = love.physics.getDistance(entity1.fixture,entity2.fixture)
-                if distance < 400 then
-                    print("JA",300,300)
+                if distance < 200 then
                     self:checkObWeizenGegeben(entity1, entity2)
                 end
             end
         end
     end
 end
-   
-
-    --!! der Code muss eher so aussehen, dass du alle ENTITÄTEN durchgehst und überprüfst welche davon eine Kuh ist und welche davon sich vermehren kann. !!--
-
 
 function kuh:checkObWeizenGegeben(entity1,entity2)
-    entity1.x,entity1.y = entity1.body:getPosition()
-    entity2.x,entity2.y = entity2.body:getPosition()
     local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
     local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
-    if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("r") then  
-        spawnEntitaet("kuh",(entity1.x + entity2.x) / 2 + 20, (entity1.y + entity2.y) / 2 + 20)  --!! benutze spawnentitaet() !!--
-        print("JA",300,300)
+    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("h") then 
+        local newX = (entity1.x + entity2.x) / 2 + 20
+        local newY = (entity1.y + entity2.y) / 2 + 20
+        spawnEntitaet("kuh",newX,newY) 
+        love.graphics.print("HALLO",200,300)
     end
 end
+
 
 function zeichneMilch(x,y,r)
     love.graphics.setColor(1,1,1)

@@ -4,38 +4,39 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    --for i = 0, 3 do
-      -- spawnEntitaet("kuh")
+    for i = 0, 3 do
        spawnEntitaet("kuh")
-   -- end
+    end
     spawnEntitaet("gehege")
     spawnEntitaet("spieler")
     spawnEntitaet("weizen")
     spawnEntitaet("schwein")
-    spawnEntitaet("schwein")
+    for i =0,3 do
     spawnEntitaet("schaf")
+    end
     startscreen.load()
 end
 
 function love.draw()
     boden()
-   for i,v in ipairs(Entitaeten) do 
+   for i,v in ipairs(Entitaeten) do
     v:draw()
    end
    startscreen.draw()
    love.graphics.setFont(love.graphics.newFont("font.ttf"))
 end
 
+
 function love.update(dt)
     removeDeadEntities(Entitaeten)
     for i,v in ipairs(Entitaeten) do 
-        if v.type=="kuh" or v.type=="schwein"then
-          -- v:checkForBreeding(Entitaeten)
+        if v.type=="schwein" and v.type=="kuh" and v.type=="schaf" and v.IsAlive==true then
+             v:checkForBreeding(Entitaeten)
         end
         v:update(dt) 
         screenNichtVerlassen(v)
     end
-    World:update(dt)
+         World:update(dt)
 end
 
 function spawnEntitaet(typ, x, y) 
@@ -83,13 +84,11 @@ function love.mousepressed(x,y,button)
     end
     if button == 2 then
         platziereWeizen(x,y)   
-    end
-    if button == 2 then
-        for i, v in ipairs(Entitaeten) do
-            if v.type == "gehege" then
-                v.IsAlive = false
-            end
-        end
+      --  for i, v in ipairs(Entitaeten) do
+       --     if v.type == "gehege" then
+        --        v.IsAlive = false
+       --     end
+      --  end
     end
 end
 

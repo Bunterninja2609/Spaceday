@@ -5,6 +5,7 @@ local schaf={}
     schaf.speed=10
     schaf.direction=math.random()*2*math.pi
     schaf.IsAlive=true
+    schaf.passiert=false
     schafe={}
 
 function schaf:load()
@@ -28,7 +29,7 @@ function schaf:update(dt)
     if self.IsAlive == true then
     self:Schlachten()
     bewegeSchafe(self,self.speed)
-   -- self:checkForBreeding(Entitaeten)
+    
     
     end
 end
@@ -51,7 +52,6 @@ function schaf:checkForBreeding(Entitaeten)
             if entity1.type == "schaf" and entity2.type == "schaf" and entity1.IsAlive and entity2.IsAlive then
                 local distance = love.physics.getDistance(entity1.fixture,entity2.fixture)
                 if distance < 400 then
-                    print("JA",300,300)
                     self:checkObWeizenGegeben(entity1, entity2)
                 end
             end
@@ -62,11 +62,14 @@ end
 function schaf:checkObWeizenGegeben(entity1,entity2)
     local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
     local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
-    if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("r") then  
-        spawnEntitaet("schaf",(entity1.x + entity2.x) / 2 + 20, (entity1.y + entity2.y) / 2 + 20) 
-        print("JA",300,300)
+    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("g") then
+        local newX = 300
+        local newY = 300
+        spawnEntitaet("schaf",newX,newY) 
     end
 end
+
+
 
 function schaf:Schlachten()
     self.x,self.y = self.body:getPosition()

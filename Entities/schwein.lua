@@ -13,22 +13,10 @@ function schwein:load()
     self.fixture = love.physics.newFixture(self.body,self.shape)
 end
 
-function schwein:neue(x,y)
-    local neuSchwein = {
-         x = x,
-         y = y,
-         body = love.physics.newBody(World, x, y, "dynamic"),
-         shape = love.physics.newCircleShape(16),
-         direction = math.random() * 2 * math.pi,
-       }
-       -- Insert new cow into the cows table
-       table.insert(schweine,neuSchwein)
-   end
 function schwein:update(dt)
     if self.IsAlive == true then
     self:Schlachten()
     bewegeSchwein(self,self.speed)
-   -- self:checkForBreeding(Entitaeten)
     
     end
 end
@@ -51,7 +39,6 @@ function schwein:checkForBreeding(Entitaeten)
             if entity1.type == "schwein" and entity2.type == "schwein" and entity1.IsAlive and entity2.IsAlive then
                 local distance = love.physics.getDistance(entity1.fixture,entity2.fixture)
                 if distance < 400 then
-                    print("JA",300,300)
                     self:checkObWeizenGegeben(entity1, entity2)
                 end
             end
@@ -62,9 +49,10 @@ end
 function schwein:checkObWeizenGegeben(entity1,entity2)
     local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
     local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
-    if distanceToPlayer1 < 50 and distanceToPlayer2 < 50 and love.keyboard.isDown("r") then  
-        spawnEntitaet("schwein",(entity1.x + entity2.x) / 2 + 20, (entity1.y + entity2.y) / 2 + 20) 
-        print("JA",300,300)
+    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("h") then 
+        local newX = 300
+        local newY = 300
+        spawnEntitaet("schwein",newX,newY) 
     end
 end
 
