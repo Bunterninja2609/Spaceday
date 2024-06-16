@@ -1,5 +1,5 @@
 local gehege={}
-gehege.type = "gehege"
+    gehege.type = "gehege"
     gehege.IsAlive=true
     gehege.x=0
     gehege.y=0

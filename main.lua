@@ -4,38 +4,44 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    --for i = 0, 3 do
-      -- spawnEntitaet("kuh")
-       spawnEntitaet("kuh")
-   -- end
+    for i = 0, 3 do
+       spawnEntitaet("kuh", 500, 300)
+    end
     spawnEntitaet("gehege")
-    spawnEntitaet("spieler")
-    spawnEntitaet("weizen")
-    spawnEntitaet("schwein")
-    spawnEntitaet("schwein")
-    spawnEntitaet("schaf")
+    spawnEntitaet("spieler", 500, 50)
+    --spawnEntitaet("weizen")
+    for i =0,3 do
+        spawnEntitaet("schwein")
+    end
+    for i =0,3 do
+        spawnEntitaet("schaf")
+    end
     startscreen.load()
+    zeit=0
 end
 
 function love.draw()
     boden()
-   for i,v in ipairs(Entitaeten) do 
+    zeichneInfo(1100,30)
+   for i,v in ipairs(Entitaeten) do
     v:draw()
    end
    startscreen.draw()
    love.graphics.setFont(love.graphics.newFont("font.ttf"))
 end
 
+
 function love.update(dt)
     removeDeadEntities(Entitaeten)
     for i,v in ipairs(Entitaeten) do 
         if v.type=="kuh" or v.type=="schwein"then
-          --v:checkForBreeding(Entitaeten)
+          -- v:checkForBreeding(Entitaeten)
         end
         v:update(dt) 
         screenNichtVerlassen(v)
     end
-    World:update(dt)
+         World:update(dt)
+         infoZeit(dt)
 end
 
 function spawnEntitaet(typ, x, y) 
@@ -45,7 +51,7 @@ function spawnEntitaet(typ, x, y)
      entitaet[key]=value
     end
     entitaet.x, entitaet.y = x, y 
-    entitaet: load()
+    entitaet:load()
     table.insert(Entitaeten,entitaet)
 end
 
@@ -79,17 +85,20 @@ end
 
 function love.mousepressed(x,y,button) 
     if button == 1 then
-        platziereGehege(x,y) 
+        if x >= 1100 and x <= 1125 and y >= 30 and y <= 55 then
+            schreibeInfo=true
+            return true
+        else 
+            platziereGehege(x,y)
+        end
     end
     if button == 2 then
         platziereWeizen(x,y)   
-    end
-    if button == 2 then
-        for i, v in ipairs(Entitaeten) do
-            if v.type == "gehege" then
-                v.IsAlive = false
-            end
-        end
+       -- for i, v in ipairs(Entitaeten) do
+         --   if v.type == "gehege" then
+         --      v.IsAlive = false
+        --    end
+       -- end
     end
 end
 
@@ -168,4 +177,29 @@ function screenNichtVerlassen(entitaet)
         y = 0
     end
     entitaet.body:setPosition(x, y)
+end
+
+function zeichneInfo(x,y)
+    love.graphics.rectangle("line",x,y,25,25)
+    love.graphics.print("?",x+3,y,0,1.8)
+    if schreibeInfo== true then
+        love.graphics.setColor(0.5, 0.5, 0.5)
+        love.graphics.rectangle("fill", x, y, 400, 150)
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print("Info:", x+10, y+10)
+        love.graphics.print("1.Melken = Taste f drücken", x+10, y+30)
+        love.graphics.print("2.Schlachten = Taste q drücken", x+10, y+50)
+        love.graphics.print("3.Züchten= Taste e drücken", x+10, y+70)
+        love.graphics.print("4.Weizen Ernten = Taste e drücken", x+10, y+90)
+    end
+end
+
+function infoZeit(dt)
+    if schreibeInfo==true then
+    zeit = zeit + dt
+        if zeit > 5 then
+         schreibeInfo = false
+         zeit=0
+        end
+    end
 end
