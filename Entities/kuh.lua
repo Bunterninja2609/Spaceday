@@ -58,7 +58,6 @@ function kuh:draw()
     local xNeu =  self.kuhBild:getWidth()
     local yNeu =  self.kuhBild:getHeight()
     zeichneKuh(self.x-xNeu,self.y-yNeu,self.kuhBild)
-    --self:checkObWeizenGegeben(self,self)
      if self.isMelking == true then 
         zeichneMilch(self.x+30,self.y+30,10)
      end

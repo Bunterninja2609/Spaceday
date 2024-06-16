@@ -6,6 +6,7 @@ local schaf={}
     schaf.direction=math.random()*2*math.pi
     schaf.IsAlive=true
     schaf.passiert=false
+    schaf.breedTimer=0
     schafe={}
 
 function schaf:load()
@@ -14,23 +15,12 @@ function schaf:load()
     self.fixture = love.physics.newFixture(self.body,self.shape)
 end
 
-function schaf:neue(x,y)
-    local neuSchaf = {
-         x = x,
-         y = y,
-         body = love.physics.newBody(World, x, y, "dynamic"),
-         shape = love.physics.newCircleShape(16),
-         direction = math.random() * 2 * math.pi,
-       }
-       -- Insert new cow into the cows table
-       table.insert(schafe,neuSchaf)
-   end
 function schaf:update(dt)
     if self.IsAlive == true then
+    self.breedTimer = self.breedTimer + dt
     self:Schlachten()
     bewegeSchafe(self,self.speed)
-    
-    
+    self:checkForBreeding(Entitaeten)
     end
 end
 
@@ -46,12 +36,12 @@ function bewegeSchafe(schaf,speed,dt)
    end
 end
 
-function schaf:checkForBreeding(Entitaeten)
-    for i, entity1 in ipairs(Entitaeten) do
-        for j, entity2 in ipairs(Entitaeten) do
+function schaf:checkForBreeding(t)
+    for i, entity1 in ipairs(t) do
+        for j, entity2 in ipairs(t) do
             if entity1.type == "schaf" and entity2.type == "schaf" and entity1.IsAlive and entity2.IsAlive then
                 local distance = love.physics.getDistance(entity1.fixture,entity2.fixture)
-                if distance < 400 then
+                if distance < 100 then
                     self:checkObWeizenGegeben(entity1, entity2)
                 end
             end
@@ -62,12 +52,16 @@ end
 function schaf:checkObWeizenGegeben(entity1,entity2)
     local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
     local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
-    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("g") then
-        local newX = 300
-        local newY = 300
-        spawnEntitaet("schaf",newX,newY) 
+    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("e") and entity1.breedTimer > 10 and entity2.breedTimer > 10 and spieler.inventar.weizen >= 4 then
+        local newX = (entity1.x + entity2.x) / 2 + 20
+        local newY = (entity1.y + entity2.y) / 2 + 20
+        spawnEntitaet("schaf",newX,newY)
+        entity1.breedTimer = 0
+        entity2.breedTimer = 0
+        spieler.inventar.weizen = spieler.inventar.weizen - 4 --!!es kostet weizen !!--
     end
 end
+
 
 
 
