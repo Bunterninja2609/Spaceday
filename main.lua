@@ -30,7 +30,7 @@ function love.update(dt)
     removeDeadEntities(Entitaeten)
     for i,v in ipairs(Entitaeten) do 
         if v.type=="kuh" or v.type=="schwein"then
-          -- v:checkForBreeding(Entitaeten)
+          --v:checkForBreeding(Entitaeten)
         end
         v:update(dt) 
         screenNichtVerlassen(v)
