@@ -68,7 +68,7 @@ end
 function weizen:ernten()
     self.x,self.y = self.body:getPosition()
     self.distance = love.physics.getDistance(spieler.fixture,self.fixture)
-    if self.distance < 64 and love.keyboard.isDown("e") then 
+    if self.distance < 30 and love.keyboard.isDown("e") then 
         spieler.inventar.weizen= spieler.inventar.weizen+1
         self.wachsTimer=0
         self.farbeGruen = 205
