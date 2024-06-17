@@ -75,15 +75,11 @@ end
 
 function schwein:draw()
     if self.IsAlive== true then
-        self.x,self.y = self.body:getPosition()
-        local xNeu =  self.schweinBild:getWidth()
-        local yNeu =  self.schweinBild:getHeight()
-        zeichneKuh(self.x-xNeu,self.y-yNeu,self.schweinBild)
+    self.x,self.y = self.body:getPosition()
+    local xNeu =  self.schweinBild:getWidth()
+    local yNeu =  self.schweinBild:getHeight()
+    zeichneKuh(self.x-xNeu,self.y-yNeu,self.schweinBild)
     end
-end
-
-function zeichneSchwein(x,y,schweinBild)
-    love.graphics.draw(schweinBild,x,y,0,2)
 end
 
 return schwein

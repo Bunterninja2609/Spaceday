@@ -33,7 +33,7 @@ function weizen:update(dt)
         end
         if self.farbeRot <= 218 then
             self.farbeRot = self.farbeRot + 6.4 * dt
-        end 
+        end
     end
    
 
@@ -45,7 +45,7 @@ function weizen:update(dt)
         self:ernten()
     end
 
-    
+
 end
 
 function weizen:draw()
@@ -70,7 +70,7 @@ function weizen:ernten()
     self.x,self.y = self.body:getPosition()
     self.distance = love.physics.getDistance(spieler.fixture,self.fixture)
     if self.distance < 30 and love.keyboard.isDown("e") then 
-        spieler.inventar.weizen = spieler.inventar.weizen+1
+        spieler.inventar.weizen = spieler.inventar.weizen+2
         spieler.xp = spieler.xp + 0.5
         self.wachsTimer=0
         self.farbeGruen = 205

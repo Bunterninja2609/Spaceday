@@ -118,15 +118,21 @@ function love.mousepressed(x,y,button)
 end
 
 function platziereWeizen(x,y)
-    if true then
-        if spieler.inventar.geld < 1 then
-            if spieler.inventar.weizen>=1 then
-                spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)
-                spieler.inventar.weizen = spieler.inventar.weizen -1
+    local canPlace = true
+
+    for i,v in ipairs(Entitaeten) do 
+        if v.type== "weizen" or v.type== "gehege" then 
+            if v.x ==  math.floor(x/30)*30 and v.y == math.floor(y/30)*30 then
+                canPlace = false
             end
-        elseif spieler.inventar.geld >= 1 then
-            spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)
-            spieler.inventar.geld = spieler.inventar.geld-1
+        end
+    end 
+    if canPlace == true then
+        spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
+        if spieler.inventar.geld < 5 then
+            spieler.inventar.weizen = spieler.inventar.weizen -2
+        elseif spieler.inventar.geld >= 5 then
+            spieler.inventar.geld = spieler.inventar.geld-5
         end
     end
 
