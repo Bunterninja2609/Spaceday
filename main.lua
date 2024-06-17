@@ -18,6 +18,15 @@ function love.load()
     end
     startscreen.load()
     zeit=0
+    soundTimer = {
+        { sound = nil, timer = 0, interval = 15 },
+        { sound = nil, timer = 0, interval = 20 },
+        { sound = nil, timer = 0, interval = 25 }
+    }
+    soundTimer[1].sound = love.audio.newSource("Textures/kuhSound.mp3", "static")
+    soundTimer[2].sound = love.audio.newSource("Textures/schafSound.mp3", "static")
+    soundTimer[3].sound = love.audio.newSource("Textures/schweinSound.mp3", "static")
+    geldSound=love.audio.newSource("Textures/geldSound.mp3","static")
 end
 
 function love.draw()
@@ -27,7 +36,7 @@ function love.draw()
     v:draw()
    end
    startscreen.draw()
-   love.graphics.setFont(love.graphics.newFont("font.ttf"))
+   love.graphics.setFont(love.graphics.newFont("font.ttf"))     
 end
 
 
@@ -42,6 +51,7 @@ function love.update(dt)
     end
          World:update(dt)
          infoZeit(dt)
+         audioAbspielen(dt)
 end
 
 function spawnEntitaet(typ, x, y) 
@@ -144,18 +154,21 @@ function love.keypressed(key)
                 if spieler.inventar.milch > 0 then
                     spieler.inventar.milch = spieler.inventar.milch - 1
                     spieler.inventar.geld = spieler.inventar.geld + 10
+                    love.audio.play(geldSound)
                 end
             end
             if key == "2" then
                 if spieler.inventar.fleisch > 0 then
                     spieler.inventar.fleisch = spieler.inventar.fleisch - 1
                     spieler.inventar.geld = spieler.inventar.geld + 20
+                    love.audio.play(geldSound)
                 end
             end
             if key == "3" then
                 if spieler.inventar.weizen > 0 then
                     spieler.inventar.weizen = spieler.inventar.weizen - 1
                     spieler.inventar.geld = spieler.inventar.geld + 5
+                    love.audio.play(geldSound)
                 end
             end
         end
@@ -189,7 +202,7 @@ function zeichneInfo(x,y)
         love.graphics.print("Info:", x+10, y+10)
         love.graphics.print("1.Melken = Taste f drücken", x+10, y+30)
         love.graphics.print("2.Schlachten = Taste q drücken", x+10, y+50)
-        love.graphics.print("3.Züchten= Taste e drücken", x+10, y+70)
+        love.graphics.print("3.Züchten = Taste e drücken", x+10, y+70)
         love.graphics.print("4.Weizen Ernten = Taste e drücken", x+10, y+90)
     end
 end
@@ -200,6 +213,27 @@ function infoZeit(dt)
         if zeit > 5 then
          schreibeInfo = false
          zeit=0
+        end
+    end
+end
+
+function audioAbspielen(dt)
+    local playSound = false
+    for _, v in ipairs(Entitaeten) do
+            if (v.type == "kuh" or v.type == "schwein" or v.type == "schaf") and v.IsAlive then
+                playSound = true
+                break
+        else
+            playSound=false
+        end
+     end
+     if playSound then
+        for _,sounds in ipairs(soundTimer) do
+                sounds.timer = sounds.timer + dt
+            if sounds.timer >= sounds.interval then
+                love.audio.play(sounds.sound)
+                sounds.timer = sounds.timer - sounds.interval  
+            end
         end
     end
 end
