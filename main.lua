@@ -31,10 +31,11 @@ end
 
 function love.draw()
     boden()
-    zeichneInfo(1100,30)
+    table.sort(Entitaeten, function(a, b) return a.body:getY() < b.body:getY() end) --!!diese Funktion sorgt dafür, dass die Entitaeten weiter hinten zuerst gezeichnet werden!!--
    for i,v in ipairs(Entitaeten) do
     v:draw()
    end
+   zeichneInfo(1100,30)
    startscreen.draw()
    love.graphics.setFont(love.graphics.newFont("font.ttf"))     
 end
@@ -70,13 +71,13 @@ function platziereGehege(x,y)
 
     for i,v in ipairs(Entitaeten) do 
         if v.type== "weizen" then 
-            if v.x ==  math.floor(x/16)*16 and v.y == math.floor(y/16)*16 then
+            if v.x ==  math.floor(x/30)*30 and v.y == math.floor(y/30)*30 then
                 canPlace = false
             end
         end
     end 
     if canPlace == true then
-        spawnEntitaet("gehege", math.floor(x/16)*16, math.floor(y/16)*16)
+        spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
         if spieler.inventar.geld < 5 then
             spieler.inventar.weizen = spieler.inventar.weizen -2
         elseif spieler.inventar.geld >= 5 then
@@ -114,7 +115,7 @@ end
 
 function platziereWeizen(x,y)
     if true then
-        spawnEntitaet("weizen",math.floor(x/16)*16,math.floor(y/16)*16)    
+        spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)    
     end
 
 end  
