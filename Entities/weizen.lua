@@ -61,7 +61,7 @@ end
 
 function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen,weizenBild)
     love.graphics.setColor(fa1,fa2,fa3)
-     love.graphics.draw(weizenBild,xweizen,yweizen,0,2)
+     love.graphics.draw(weizenBild,xweizen - 16,yweizen - 16,0,2)
      love.graphics.setColor(1,1,1)-- damit der boden nicht übermalt wird
 end
 
@@ -69,7 +69,7 @@ function weizen:ernten()
     self.x,self.y = self.body:getPosition()
     self.distance = love.physics.getDistance(spieler.fixture,self.fixture)
     if self.distance < 30 and love.keyboard.isDown("e") then 
-        spieler.inventar.weizen= spieler.inventar.weizen+1
+        spieler.inventar.weizen = spieler.inventar.weizen+1
         self.wachsTimer=0
         self.farbeGruen = 205
         self.farbeBlau = 50
