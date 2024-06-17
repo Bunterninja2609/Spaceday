@@ -6,8 +6,9 @@ local schaf={}
     schaf.direction=math.random()*2*math.pi
     schaf.IsAlive=true
     schaf.passiert=false
-    schaf.breedTimer=0
-    schaf.timer=0
+    schaf.breedTimer = 0
+    schaf.timer = 0
+    schaf.schafBild = love.graphics.newImage("Textures/schaf 0.png")
     schafe={}
 
 function schaf:load()
@@ -71,7 +72,6 @@ function schaf:Wolle(dt)
      if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
           self.timer=self.timer+dt
           spieler.inventar.wolle= spieler.inventar.wolle+1
-          spieler.xp = spieler.xp + 0.5
     end
 end
 
@@ -89,14 +89,14 @@ end
 function schaf:draw()
     if self.IsAlive== true then
     self.x,self.y = self.body:getPosition()
-    zeichneSchafe(self.x,self.y,16)
+    local xNeu =  self.schafBild:getWidth()
+    local yNeu =  self.schafBild:getHeight()
+    zeichneSchafe(self.x-xNeu,self.y-yNeu,self.schafBild)
     end
 end
 
-function zeichneSchafe(x,y,r)
-    love.graphics.setColor(0.8,0.8,0.8)
-    love.graphics.circle("fill",x,y,r)
-    love.graphics.setColor(1,1,1)--damit Boden nicht übermalt wird
+function zeichneSchafe(x,y,schafBild)
+    love.graphics.draw(schafBild,x,y,0,2)
 end
 
 return schaf
