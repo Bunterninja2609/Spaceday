@@ -28,6 +28,7 @@ end
 function spieler:update(dt)
     bewegeSpieler(self.speed,self.body)
     shopTaste()
+    level()
 end
 
 function spieler:draw()
@@ -93,5 +94,13 @@ function zeichneLevel(w)
     love.graphics.setColor(1,0,0)
     love.graphics.rectangle("fill",10,170,w,10)
     love.graphics.print("XP:".. spieler.xp .. "/100",10,190)
+end
+
+function level()
+    
+    if spieler.xp> 100 then
+        spieler.inventar.level = spieler.inventar.level+1
+        spieler.xp = 0
+    end
 end
 return spieler
