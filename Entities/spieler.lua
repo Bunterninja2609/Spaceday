@@ -6,6 +6,7 @@ spieler={}
     spieler.direction=1
     spieler.spielerBild = love.graphics.newImage("Textures/spieler.png")
     
+    
    
 function spieler:load()
     self.body = love.physics.newBody(World,self.x,self.y, "dynamic")
@@ -17,8 +18,10 @@ function spieler:load()
         fleisch = 0,
         wolle = 0,
         gehege = 20,
-        weizen = 20
+        weizen = 20,
+        level = 0
     }
+    spieler.xp = 0
     self.nutzeShop = false
 end
 
@@ -29,11 +32,13 @@ end
 
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
+    zeichneLevel(spieler.xp)
     zeichneInventar()
     zeichneShop(1600,50)
     local xNeu =  self.spielerBild:getWidth()
     local yNeu =  self.spielerBild:getHeight()
     zeichneSpieler(self.x-xNeu,self.y-yNeu,self.spielerBild)
+    
 end
 function zeichneSpieler(x,y,spielerBild)
     love.graphics.setColor(1,1,1)
@@ -47,6 +52,7 @@ function zeichneInventar()
     love.graphics.print("Wolle: " .. spieler.inventar.wolle, 10, 90)
     love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 110)
     love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 130)
+    love.graphics.print("Level: " .. spieler.inventar.level, 10, 150)
 end
 function zeichneShop(x,y)
     if spieler.nutzeShop == true then
@@ -81,5 +87,11 @@ function shopTaste()
     else
         spieler.nutzeShop = false
     end
+end
+
+function zeichneLevel(w)
+    love.graphics.setColor(1,0,0)
+    love.graphics.rectangle("fill",10,170,w,10)
+    love.graphics.print("XP:".. spieler.xp .. "/100",10,190)
 end
 return spieler

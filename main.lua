@@ -37,7 +37,8 @@ function love.draw()
    end
    zeichneInfo(1100,30)
    startscreen.draw()
-   love.graphics.setFont(love.graphics.newFont("font.ttf"))     
+   love.graphics.setFont(love.graphics.newFont("font.ttf"))   
+     
 end
 
 

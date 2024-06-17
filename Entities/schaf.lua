@@ -61,6 +61,7 @@ function schaf:checkObWeizenGegeben(entity1,entity2)
         entity1.breedTimer = 0
         entity2.breedTimer = 0
         spieler.inventar.weizen = spieler.inventar.weizen - 4 --!!es kostet weizen !!--
+        spieler.xp = spieler.xp + 0.5
     end
 end
 
@@ -70,6 +71,7 @@ function schaf:Wolle(dt)
      if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
           self.timer=self.timer+dt
           spieler.inventar.wolle= spieler.inventar.wolle+1
+          spieler.xp = spieler.xp + 0.5
     end
 end
 
@@ -79,6 +81,7 @@ function schaf:Schlachten()
     local distance = love.physics.getDistance(self.fixture,spieler.fixture)
     if distance < 100 and love.keyboard.isDown("q") then
         spieler.inventar.fleisch = spieler.inventar.fleisch + 1
+        spieler.xp = spieler.xp + 0.5
         self.IsAlive = false
     end
 end
