@@ -30,7 +30,7 @@ end
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
     zeichneInventar()
-    zeichneShop(1600,50)
+    zeichneShop(600,50)
     local xNeu =  self.spielerBild:getWidth()
     local yNeu =  self.spielerBild:getHeight()
     zeichneSpieler(self.x-xNeu,self.y-yNeu,self.spielerBild)
@@ -56,7 +56,7 @@ function zeichneShop(x,y)
         love.graphics.print("Shop:", x+10, y+10)
         love.graphics.print("1. Milch verkaufen (+10 Geld)", x+10, y+30)
         love.graphics.print("2. Fleisch verkaufen (+20 Geld)", x+10, y+50)
-        love.graphics.print("3. Weizen verkaufen (+5 Geld)", x+10, y+70)
+        love.graphics.print("4. Weizen verkaufen (+5 Geld)", x+10, y+70)
     end
 end
 
@@ -76,7 +76,7 @@ function bewegeSpieler(speed,body)
     body:setLinearVelocity(speedX,speedY)
 end
 function shopTaste()
-    if love.keyboard.isDown("g") then
+    if love.keyboard.isDown("k") then
         spieler.nutzeShop = true
     else
         spieler.nutzeShop = false

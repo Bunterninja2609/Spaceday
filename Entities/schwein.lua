@@ -1,11 +1,12 @@
 local schwein={} 
     schwein.type = "schwein"
-    schwein.x=400
-    schwein.y=300
+    schwein.x=500
+    schwein.y=500
     schwein.speed=10
     schwein.direction=math.random()*2*math.pi
     schwein.IsAlive=true
     schwein.breedTimer=0
+    schwein.schweinBild = love.graphics.newImage("Textures/schwein.png")
     schweine={}
 
 function schwein:load()
@@ -72,15 +73,15 @@ end
 
 function schwein:draw()
     if self.IsAlive== true then
-    self.x,self.y = self.body:getPosition()
-    zeichneSchwein(self.x,self.y,16)
+        self.x,self.y = self.body:getPosition()
+        local xNeu =  self.schweinBild:getWidth()
+        local yNeu =  self.schweinBild:getHeight()
+        zeichneKuh(self.x-xNeu,self.y-yNeu,self.schweinBild)
     end
 end
 
-function zeichneSchwein(x,y,r)
-    love.graphics.setColor(1,0.4,0.6)
-    love.graphics.circle("fill",x,y,r)
-    love.graphics.setColor(1,1,1)--damit Boden nicht übermalt wird
+function zeichneSchwein(x,y,schweinBild)
+    love.graphics.draw(schweinBild,x,y,0,2)
 end
 
 return schwein

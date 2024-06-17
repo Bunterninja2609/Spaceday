@@ -10,11 +10,11 @@ function love.load()
     spawnEntitaet("gehege")
     spawnEntitaet("spieler", 500, 50)
     --spawnEntitaet("weizen")
-    for i =0,3 do
-        spawnEntitaet("schwein")
+    for i =0, 3 do
+        spawnEntitaet("schwein",600,300)
     end
     for i =0,3 do
-        spawnEntitaet("schaf")
+        spawnEntitaet("schaf",400,400)
     end
     startscreen.load()
     zeit=0
@@ -77,10 +77,13 @@ function platziereGehege(x,y)
         end
     end 
     if canPlace == true then
-        spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
         if spieler.inventar.geld < 5 then
-            spieler.inventar.weizen = spieler.inventar.weizen -2
+            if spieler.inventar.weizen>=2 then
+                spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
+                spieler.inventar.weizen = spieler.inventar.weizen -2
+            end
         elseif spieler.inventar.geld >= 5 then
+            spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
             spieler.inventar.geld = spieler.inventar.geld-5
         end
     end
@@ -115,7 +118,15 @@ end
 
 function platziereWeizen(x,y)
     if true then
-        spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)    
+        if spieler.inventar.geld < 1 then
+            if spieler.inventar.weizen>=1 then
+                spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)
+                spieler.inventar.weizen = spieler.inventar.weizen -1
+            end
+        elseif spieler.inventar.geld >= 1 then
+            spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)
+            spieler.inventar.geld = spieler.inventar.geld-1
+        end
     end
 
 end  
