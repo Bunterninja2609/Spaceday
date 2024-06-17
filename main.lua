@@ -166,6 +166,13 @@ function love.keypressed(key)
                 end
             end
             if key == "3" then
+                if spieler.inventar.wolle > 0 then
+                    spieler.inventar.wolle = spieler.inventar.wolle - 1
+                    spieler.inventar.geld = spieler.inventar.geld + 15
+                    love.audio.play(geldSound)
+                end
+            end
+            if key == "4" then
                 if spieler.inventar.weizen > 0 then
                     spieler.inventar.weizen = spieler.inventar.weizen - 1
                     spieler.inventar.geld = spieler.inventar.geld + 5
@@ -195,7 +202,7 @@ end
 
 function zeichneInfo(x,y)
     love.graphics.rectangle("line",x,y,25,25)
-    love.graphics.print("?",x+3,y,0,1.8)
+    love.graphics.print("!",x+2,y-2,0,2)
     if schreibeInfo== true then
         love.graphics.setColor(0.5, 0.5, 0.5)
         love.graphics.rectangle("fill", x, y, 400, 150)
@@ -219,16 +226,16 @@ function infoZeit(dt)
 end
 
 function audioAbspielen(dt)
-    local playSound = false
+    local tierLebt = false
     for _, v in ipairs(Entitaeten) do
             if (v.type == "kuh" or v.type == "schwein" or v.type == "schaf") and v.IsAlive then
-                playSound = true
+                tierLebt = true
                 break
-        else
-            playSound=false
+            else
+                tierLebt=false
+            end
         end
-     end
-     if playSound then
+     if tierLebt then
         for _,sounds in ipairs(soundTimer) do
                 sounds.timer = sounds.timer + dt
             if sounds.timer >= sounds.interval then

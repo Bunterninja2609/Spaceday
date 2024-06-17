@@ -15,6 +15,7 @@ function spieler:load()
         geld = 0,
         milch = 0,
         fleisch = 0,
+        wolle = 0,
         gehege = 20,
         weizen = 20
     }
@@ -43,8 +44,9 @@ function zeichneInventar()
     love.graphics.print("Geld: " .. spieler.inventar.geld, 10, 30)
     love.graphics.print("Milch: " .. spieler.inventar.milch, 10, 50)
     love.graphics.print("Fleisch: " .. spieler.inventar.fleisch, 10, 70)
-    love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 90)
-    love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 110)
+    love.graphics.print("Wolle: " .. spieler.inventar.wolle, 10, 90)
+    love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 110)
+    love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 130)
 end
 function zeichneShop(x,y)
     if spieler.nutzeShop == true then

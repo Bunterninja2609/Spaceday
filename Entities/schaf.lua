@@ -7,6 +7,7 @@ local schaf={}
     schaf.IsAlive=true
     schaf.passiert=false
     schaf.breedTimer=0
+    schaf.timer=0
     schafe={}
 
 function schaf:load()
@@ -19,6 +20,7 @@ function schaf:update(dt)
     if self.IsAlive == true then
     self.breedTimer = self.breedTimer + dt
     self:Schlachten()
+    self:Wolle(dt)
     bewegeSchafe(self,self.speed)
     self:checkForBreeding(Entitaeten)
     end
@@ -62,7 +64,14 @@ function schaf:checkObWeizenGegeben(entity1,entity2)
     end
 end
 
-
+function schaf:Wolle(dt)
+    self.x,self.y = self.body:getPosition()
+    local distance = love.physics.getDistance(self.fixture,spieler.fixture)
+     if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
+          self.timer=self.timer+dt
+          spieler.inventar.wolle= spieler.inventar.wolle+1
+    end
+end
 
 
 function schaf:Schlachten()
