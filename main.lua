@@ -37,7 +37,8 @@ function love.draw()
    end
    zeichneInfo(1100,30)
    startscreen.draw()
-   love.graphics.setFont(love.graphics.newFont("font.ttf"))     
+   love.graphics.setFont(love.graphics.newFont("font.ttf"))   
+
 end
 
 
@@ -70,7 +71,7 @@ function platziereGehege(x,y)
     local canPlace = true
 
     for i,v in ipairs(Entitaeten) do 
-        if v.type== "weizen" then 
+        if v.type== "weizen" or v.type== "gehege" then 
             if v.x ==  math.floor(x/30)*30 and v.y == math.floor(y/30)*30 then
                 canPlace = false
             end

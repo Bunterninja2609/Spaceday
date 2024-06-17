@@ -70,6 +70,7 @@ function weizen:ernten()
     self.distance = love.physics.getDistance(spieler.fixture,self.fixture)
     if self.distance < 30 and love.keyboard.isDown("e") then 
         spieler.inventar.weizen = spieler.inventar.weizen+1
+        spieler.xp = spieler.xp + 0.5
         self.wachsTimer=0
         self.farbeGruen = 205
         self.farbeBlau = 50
