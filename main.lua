@@ -22,10 +22,11 @@ end
 
 function love.draw()
     boden()
-    zeichneInfo(1100,30)
+    table.sort(Entitaeten, function(a, b) return a.body:getY() < b.body:getY() end) --!!diese Funktion sorgt dafür, dass die Entitaeten weiter hinten zuerst gezeichnet werden!!--
    for i,v in ipairs(Entitaeten) do
     v:draw()
    end
+   zeichneInfo(1100,30)
    startscreen.draw()
    love.graphics.setFont(love.graphics.newFont("font.ttf"))
 end
