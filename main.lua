@@ -115,9 +115,7 @@ function love.mousepressed(x,y,button)
 end
 
 function platziereWeizen(x,y)
-    --[[if true then
-        spawnEntitaet("weizen",math.floor(x/30)*30,math.floor(y/30)*30)    
-    end]]
+
     local canPlace = true
 
     for i,v in ipairs(Entitaeten) do 

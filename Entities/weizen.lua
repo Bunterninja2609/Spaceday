@@ -19,7 +19,7 @@ function weizen:load()
     self.shape = love.physics.newRectangleShape(16,16)
     self.fixture = love.physics.newFixture(self.body,self.shape)
     self.fixture:setMask(1)
-
+    weizenMinus()
 end
 
 function weizen:update(dt)
@@ -33,7 +33,7 @@ function weizen:update(dt)
         end
         if self.farbeRot <= 218 then
             self.farbeRot = self.farbeRot + 6.4 * dt
-        end
+        end 
     end
    
 
@@ -45,6 +45,7 @@ function weizen:update(dt)
         self:ernten()
     end
 
+    
 end
 
 function weizen:draw()
@@ -79,5 +80,10 @@ function weizen:ernten()
 
 end
 
+function weizenMinus()
+    if spieler.inventar.weizen < 0 then
+        spieler.inventar.level = spieler.inventar.level-1
+    end
+end
 
 return weizen
