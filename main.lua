@@ -79,9 +79,9 @@ function platziereGehege(x,y)
     end 
     if canPlace == true then
         if spieler.inventar.geld < 5 then
-            if spieler.inventar.weizen>=2 then
+            if spieler.inventar.gehege>=2 then
                 spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
-                spieler.inventar.weizen = spieler.inventar.weizen -2
+                spieler.inventar.gehege = spieler.inventar.gehege -2
             end
         elseif spieler.inventar.geld >= 5 then
             spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
