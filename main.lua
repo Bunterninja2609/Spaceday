@@ -109,11 +109,6 @@ function love.mousepressed(x,y,button)
     end
     if button == 2 then
         platziereWeizen(x,y)   
-       -- for i, v in ipairs(Entitaeten) do
-         --   if v.type == "gehege" then
-         --      v.IsAlive = false
-        --    end
-       -- end
     end
 end
 
@@ -168,6 +163,13 @@ function love.keypressed(key)
         end 
     end
     if szene == 2 then
+        if key == "x" then
+            for i, v in ipairs(Entitaeten) do
+                if v.type == "gehege" then
+                  v.IsAlive = false
+                end
+            end
+        end
         if spieler.nutzeShop == true then 
             if key == "1" then
                 if spieler.inventar.milch > 0 then
