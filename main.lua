@@ -14,7 +14,7 @@ function love.load()
      --   spawnEntitaet("schwein",600,300)
     --end
     --for i =0,3 do
-        spawnEntitaet("schaf",400,400)
+       -- spawnEntitaet("schaf",400,400)
     --end
     startscreen.load()
     zeit=0
