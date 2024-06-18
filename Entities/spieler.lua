@@ -91,16 +91,45 @@ function shopTaste()
 end
 
 function zeichneLevel(w)
-    love.graphics.setColor(1,0,0)
-    love.graphics.rectangle("fill",10,170,w,10)
-    love.graphics.print("XP:".. spieler.xp .. "/100",10,190)
+    if spieler.inventar.level==0 then
+      love.graphics.setColor(1,0,0)
+      love.graphics.rectangle("fill",10,170,w,10)
+      love.graphics.print("XP:".. spieler.xp .. "/100",10,190)
+    end
+    if spieler.inventar.level==1 then
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle("fill",10,170,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/250",10,190)
+      end
+    if spieler.inventar.level==2  then
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle("fill",10,170,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/500",10,190)
+    end
 end
 
 function level()
     
-    if spieler.xp> 100 then
+    if spieler.xp> 20 and spieler.inventar.level == 0 then
         spieler.inventar.level = spieler.inventar.level+1
         spieler.xp = 0
+        for i = 0, 3 do
+            spawnEntitaet("kuh", 500, 300)
+         end
+    end
+    if spieler.xp> 50 and spieler.inventar.level==1 then
+        spieler.inventar.level = spieler.inventar.level+1
+        spieler.xp = 0
+        for i = 0, 3 do
+            spawnEntitaet("schwein", 500, 300)
+         end
+    end
+    if spieler.xp> 100 and spieler.inventar.level==2 then
+        spieler.inventar.level = spieler.inventar.level+1
+        spieler.xp = 0
+        for i = 0, 3 do
+            spawnEntitaet("schaf", 500, 300)
+         end
     end
 end
 return spieler

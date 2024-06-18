@@ -4,18 +4,18 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    for i = 0, 3 do
-       spawnEntitaet("kuh", 500, 300)
-    end
+    --for i = 0, 3 do
+    --   spawnEntitaet("kuh", 500, 300)
+    --end
     spawnEntitaet("gehege")
     spawnEntitaet("spieler", 500, 50)
     --spawnEntitaet("weizen")
-    for i =0, 3 do
-        spawnEntitaet("schwein",600,300)
-    end
-    for i =0,3 do
+    --for i =0, 3 do
+     --   spawnEntitaet("schwein",600,300)
+    --end
+    --for i =0,3 do
         spawnEntitaet("schaf",400,400)
-    end
+    --end
     startscreen.load()
     zeit=0
     soundTimer = {

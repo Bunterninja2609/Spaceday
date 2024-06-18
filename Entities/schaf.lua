@@ -72,6 +72,7 @@ function schaf:Wolle(dt)
      if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
           self.timer=self.timer+dt
           spieler.inventar.wolle= spieler.inventar.wolle+1
+          self.schafBild=love.graphics.newImage("Textures/schaf 1.png")
     end
 end
 
