@@ -4,7 +4,7 @@ startscreen.y = 0
 
 function startscreen.load()
     szene = 1 
-	start = love.graphics.newImage("Textures/galaxy.jpg")
+	start = love.graphics.newImage("Textures/startscreen.png")
 end
 
 function startscreen.draw()
