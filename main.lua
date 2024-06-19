@@ -35,9 +35,11 @@ function love.draw()
    for i,v in ipairs(Entitaeten) do
     v:draw()
    end
-   zeichneInfo(1850,30)
-   startscreen.draw()
-   love.graphics.setFont(love.graphics.newFont("font.ttf"))   
+    local screenWidth = love.graphics.getWidth()
+    local screenHeight = love.graphics.getHeight()
+    zeichneInfo(screenWidth-70,screenHeight-1050)
+     startscreen.draw()
+     love.graphics.setFont(love.graphics.newFont("font.ttf"))   
 
 end
 
