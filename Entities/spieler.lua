@@ -111,6 +111,11 @@ function zeichneLevel(w)
         love.graphics.rectangle("fill",10,170,w,10)
         love.graphics.print("XP:".. spieler.xp .. "/500",10,190)
     end
+    if spieler.inventar.level==3  then
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle("fill",10,170,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/1000",10,190)
+    end
 end
 
 function level()
@@ -134,6 +139,13 @@ function level()
         spieler.xp = 0
         for i = 0, 3 do
             spawnEntitaet("schaf", 500, 300)
+         end
+    end
+    if spieler.xp> 1000 and spieler.inventar.level==3 then
+        spieler.inventar.level = spieler.inventar.level+1
+        spieler.xp = 0
+        for i = 0, 3 do
+            spawnEntitaet("huhn", 500, 300)
          end
     end
 end

@@ -132,7 +132,6 @@ function platziereWeizen(x,y)
         end
     end 
     if canPlace == true then
-        
         if spieler.inventar.geld < 5 and spieler.inventar.weizen > 2  then
             spieler.inventar.weizen = spieler.inventar.weizen -2
             spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
