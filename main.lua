@@ -165,11 +165,16 @@ function love.keypressed(key)
         end 
     end
     if szene == 2 then
+    
         if key == "x" then
+            mauspos = love.mouse.getPosition( ) 
             for i, v in ipairs(Entitaeten) do
+                if mauspos >= v.x and mauspos <= v.x+16 then
+                spieler.inventar.gehege = spieler.inventar.gehege +2
                 if v.type == "gehege" then
                   v.IsAlive = false
                 end
+            end
             end
         end
         if spieler.nutzeShop == true then 
