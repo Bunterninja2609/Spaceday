@@ -34,13 +34,9 @@ end
 
 function spieler:draw()
     self.x,self.y = self.body:getPosition()
-    zeichneLevel(spieler.xp)
-    zeichneInventar()
-    zeichneShop(600,50)
     local xNeu =  self.spielerBild:getWidth()
     local yNeu =  self.spielerBild:getHeight()
     zeichneSpieler(self.x-xNeu,self.y-yNeu,self.spielerBild)
-    
 end
 function zeichneSpieler(x,y,spielerBild)
     love.graphics.setColor(1,1,1)
