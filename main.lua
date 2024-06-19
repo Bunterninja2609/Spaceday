@@ -39,6 +39,7 @@ function love.draw()
     end
     camera.exit()
     startscreen.draw()
+    love.graphics.setBackgroundColor(58/255, 68/255, 102/255)
     love.graphics.setFont(love.graphics.newFont("font.ttf"))   
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
