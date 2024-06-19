@@ -5,19 +5,20 @@ function love.load()
     World=love.physics.newWorld(0,0,true)
     love.physics.setMeter(32)
     Entitaeten={}
-    --for i = 0, 3 do
-      --spawnEntitaet("kuh", 500, 300)
-    --end
-   -- spawnEntitaet("gehege")
-    spawnEntitaet("spieler", 500, 50)
+    --[[for i = 0, 3 do
+      spawnEntitaet("kuh", 500, 300)
+    end
+    spawnEntitaet("gehege")
+   
     --spawnEntitaet("weizen")
-    --for i =0, 3 do
-      --  spawnEntitaet("schwein",600,300)
-    --end
-    --for i =0,3 do
-    -- spawnEntitaet("schaf",400,400)
-    -- spawnEntitaet("huhn",400,400)
-    --end
+    for i =0, 3 do
+        spawnEntitaet("schwein",600,300)
+    end
+    for i =0,3 do
+         spawnEntitaet("schaf",400,400)
+         spawnEntitaet("huhn",400,400)
+    end ]]--
+    spawnEntitaet("spieler", 500, 50)
     startscreen.load()
     zeit=0
     soundTimer = {
@@ -47,7 +48,7 @@ function love.draw()
     zeichneInfo(screenWidth-70,30)
     zeichneInventar() 
     zeichneLevel(spieler.xp)
-    zeichneShop(screenWidth-450,50)
+    zeichneShop(screenWidth-550,50)
     startscreen.draw()
     love.graphics.setFont(love.graphics.newFont("font.ttf"))  
 end
@@ -116,7 +117,67 @@ function love.mousepressed(x,y,button)
         if x >= screenWidth-70 and x <= screenWidth-70+25 and y >= 30 and y <= 55 then
             schreibeInfo=true
             return true
-        else 
+        elseif nutzeShop == true then
+            if x>=screenWidth-550+200 and x<=screenWidth-550+225 then
+                if y>=50+30 and y<=50+55 then
+                    if spieler.inventar.weizen > 0 then
+                        spieler.inventar.weizen = spieler.inventar.weizen - 1
+                        spieler.inventar.geld = spieler.inventar.geld + 7
+                        love.audio.play(geldSound)
+                    end
+                elseif y>=50+50 and y<=50+75 then
+                    if spieler.inventar.milch > 0 then
+                        spieler.inventar.milch = spieler.inventar.milch - 10
+                        spieler.inventar.geld = spieler.inventar.geld + 7
+                        love.audio.play(geldSound)
+                    end
+                elseif y>=50+70 and y<=50+95 then
+                    if spieler.inventar.fleisch > 0 then
+                        spieler.inventar.fleisch = spieler.inventar.fleisch - 1
+                        spieler.inventar.geld = spieler.inventar.geld + 20
+                        love.audio.play(geldSound)
+                    end
+                elseif y>=50+90 and y<=50+115 then
+                    if spieler.inventar.wolle > 0 then
+                        spieler.inventar.wolle = spieler.inventar.wolle - 1
+                        spieler.inventar.geld = spieler.inventar.geld + 15
+                        love.audio.play(geldSound)
+                    end
+                elseif y>=50+110 and y<=50+135 then
+                    if spieler.inventar.ei > 0 then
+                        spieler.inventar.ei = spieler.inventar.ei - 1
+                        spieler.inventar.geld = spieler.inventar.geld + 15
+                        love.audio.play(geldSound)
+                    end
+                end
+            elseif x>=screenWidth-550+450 and x<=screenWidth-550+475 then
+                if y>=50+30 and y<=50+55 then
+                    if spieler.inventar.weizen > 0 then
+                        spieler.inventar.weizen = spieler.inventar.weizen + 1
+                        spieler.inventar.geld = spieler.inventar.geld - 5
+                        love.audio.play(geldSound)
+                    end
+                elseif y>=50+50 and y<=50+75 then
+                    if spieler.inventar.gehege > 0 then
+                        spieler.inventar.gehege = spieler.inventar.gehege + 1
+                        spieler.inventar.geld = spieler.inventar.geld -5
+                        love.audio.play(geldSound)
+                    end
+                elseif y>=50+70 and y<=50+95 and spieler.inventar.level==1 then
+                    spieler.inventar.geld = spieler.inventar.geld -50
+                        love.audio.play(geldSound)
+                elseif y>=50+90 and y<=50+115  and spieler.inventar.level==2 then
+                    spieler.inventar.geld = spieler.inventar.geld -30
+                        love.audio.play(geldSound)
+                elseif y>=50+110 and y<=50+135 and spieler.inventar.level==3  then
+                    spieler.inventar.geld = spieler.inventar.geld -70
+                        love.audio.play(geldSound)
+                elseif y>=50+130 and y<=50+155 and spieler.inventar.level==4  then
+                    spieler.inventar.geld = spieler.inventar.geld -80
+                        love.audio.play(geldSound)
+                end
+            end
+        else
             platziereGehege(camera.mouseX,camera.mouseY)
         end
     end
@@ -191,7 +252,7 @@ function love.keypressed(key)
             end
             end
         end
-        if spieler.nutzeShop == true then 
+        --[[if spieler.nutzeShop == true then 
             if key == "1" then
                 if spieler.inventar.milch > 0 then
                     spieler.inventar.milch = spieler.inventar.milch - 1
@@ -227,7 +288,7 @@ function love.keypressed(key)
                     love.audio.play(geldSound)
                 end
             end
-        end
+        end]]--
     end
 end
 

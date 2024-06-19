@@ -20,7 +20,6 @@ function spieler:load()
         wolle = 0,
         gehege = 20,
         weizen = 20,
-        level = 0
     }
     spieler.xp = 0
     self.nutzeShop = false
@@ -44,29 +43,99 @@ function zeichneSpieler(x,y,spielerBild)
     love.graphics.draw(spieler.spielerBild,x,y,0,2)
 end
 function zeichneInventar()
-    love.graphics.setColor(1, 1, 1)
+    love.graphics.setColor(1, 1, 0)
     love.graphics.print("Geld: " .. spieler.inventar.geld, 10, 30)
-    love.graphics.print("Milch: " .. spieler.inventar.milch, 10, 50)
-    love.graphics.print("Fleisch: " .. spieler.inventar.fleisch, 10, 70)
-    love.graphics.print("Ei: " .. spieler.inventar.ei, 10, 90)
-    love.graphics.print("Wolle: " .. spieler.inventar.wolle, 10, 110)
-    love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 130)
-    love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 150)
+    love.graphics.setColor(1,1,1)
+    love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 50)
+    love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 70)
+    if spieler.inventar.level < 1 then 
+        love.graphics.setColor(0.5,0.5,0.5)
+    end
+    love.graphics.print("Milch: " .. spieler.inventar.milch, 10, 90)
+    love.graphics.print("Fleisch: " .. spieler.inventar.fleisch, 10, 110)
+    if spieler.inventar.level < 3 then 
+        love.graphics.setColor(0.5,0.5,0.5)
+    end
+    love.graphics.print("Wolle: " .. spieler.inventar.wolle, 10, 130)
+    if spieler.inventar.level < 4 then 
+        love.graphics.setColor(0.5,0.5,0.5)
+    end
+    love.graphics.print("Eier: " .. spieler.inventar.ei, 10, 150)
+    love.graphics.setColor(1, 0, 0)
     love.graphics.print("Level: " .. spieler.inventar.level, 10, 170)
 end
 function zeichneShop(x,y)
     if spieler.nutzeShop == true then
         love.graphics.setColor(0.5, 0.5, 0.5)
-        love.graphics.rectangle("fill", x, y, 400, 150)
+        love.graphics.rectangle("fill", x, y, 500, 150)
+        love.graphics.setColor(0,0,0)
+        love.graphics.rectangle("line", x, y, 500, 150)
         love.graphics.setColor(1, 1, 1)
-        love.graphics.print("Shop:", x+10, y+10)
-        love.graphics.print("1. Milch verkaufen (+10 Geld)", x+10, y+30)
-        love.graphics.print("2. Fleisch verkaufen (+20 Geld)", x+10, y+50)
-        love.graphics.print("3. Ei verkaufen (+20 Geld)", x+10, y+70)
-        love.graphics.print("4. Wolle verkaufen (+20 Geld)", x+10, y+90)
-        love.graphics.print("5. Weizen verkaufen (+5 Geld)", x+10, y+110)
+
+        love.graphics.setColor(1,1,0)  
+        love.graphics.print("Verkaufen", x+10, y+10)
+        love.graphics.setColor(1, 1, 1)
+            love.graphics.print("Weizen (+7 Geld)", x+10, y+30)
+            zeichneShopButton(x,y+30,verkauf)
+            if spieler.inventar.level >= 1 then
+                love.graphics.print("Milch (+10 Geld)", x+10, y+50)
+                zeichneShopButton(x,y+50,verkauf)
+                love.graphics.print("Fleisch (+15 Geld)", x+10, y+70)
+                zeichneShopButton(x,y+70,verkauf)
+            end
+            if spieler.inventar.level >= 3 then
+                love.graphics.print("Wolle (+20 Geld)", x+10, y+90)
+                zeichneShopButton(x,y+90,verkauf)
+            end
+            if spieler.inventar.level >= 4 then
+                love.graphics.print("Ei (+20 Geld)", x+10, y+110)
+                zeichneShopButton(x,y+110,verkauf)
+            end
+            
+        love.graphics.setColor(1,1,0)  
+        love.graphics.print("Kaufen", x+250, y+10)
+            love.graphics.setColor(1, 1, 1)
+            love.graphics.print("Weizen (-5 Geld)", x+250, y+30)
+            zeichneShopButton(x,y+30,kauf)
+            love.graphics.print("Gehege (-5 Geld)", x+250, y+50)
+            zeichneShopButton(x,y+50,kauf)
+            if spieler.inventar.level >= 1 then
+                love.graphics.print("Kuh (-50 Geld)", x+250, y+70)
+                zeichneShopButton(x,y+70,kauf)
+            end
+            if spieler.inventar.level >= 2 then
+                love.graphics.print("Schwein (-30 Geld)", x+250, y+90)
+                zeichneShopButton(x,y+90,kauf)
+            end
+            if spieler.inventar.level >= 3 then
+                love.graphics.print("Schaf (-70 Geld)", x+250, y+110)
+                zeichneShopButton(x,y+110,kauf)
+            end
+            if spieler.inventar.level >= 4 then
+                love.graphics.print("Huhn (-80 Geld)", x+250, y+130)
+                zeichneShopButton(x,y+130,kauf)
+            end
     end
 end
+function zeichneShopButton(x,y,modus)
+    if modus == verkauf then
+    love.graphics.setColor(0,1,0)
+    love.graphics.rectangle("fill", x+200, y , 25,15)
+    love.graphics.setColor(0,0.4,0)
+    love.graphics.rectangle("line", x+200, y , 25,15)
+    love.graphics.print("-1",x+200,y)
+    end
+    if modus == kauf then
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle("fill", x+450, y , 25,15)
+        love.graphics.setColor(0.4,0,0)
+        love.graphics.rectangle("line", x+450, y , 25,15)
+        love.graphics.print("+1",x+450,y)
+    end
+    love.graphics.setColor(1,1,1)
+end
+
+
 
 function bewegeSpieler(speed,body)
     local speedX = 0
@@ -98,28 +167,32 @@ end
 function zeichneLevel(w)
     if spieler.inventar.level==0 then
       love.graphics.setColor(1,0,0)
-      love.graphics.rectangle("fill",10,170,w,10)
-      love.graphics.print("XP:".. spieler.xp .. "/50",10,190)
+      love.graphics.rectangle("fill",10,190,w,10)
+      love.graphics.print("XP:".. spieler.xp .. "/50",10,210)
     end
     if spieler.inventar.level==1 then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,170,w,10)
-        love.graphics.print("XP:".. spieler.xp .. "/250",10,190)
+        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/250",10,210)
       end
     if spieler.inventar.level==2  then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,170,w,10)
-        love.graphics.print("XP:".. spieler.xp .. "/500",10,190)
+        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/500",10,210)
     end
-    if spieler.inventar.level==3  then
+    if spieler.inventar.level==3 then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,170,w,10)
-        love.graphics.print("XP:".. spieler.xp .. "/1000",10,190)
+        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/1000",10,210)
+    end
+    if spieler.inventar.level==4  then
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.print("XP:".. spieler.xp .. "/1500",10,210)
     end
 end
 
 function level()
-    
     if spieler.xp> 50 and spieler.inventar.level == 0 then
         spieler.inventar.level = spieler.inventar.level+1
         spieler.xp = 0
