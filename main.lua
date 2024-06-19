@@ -5,7 +5,7 @@ function love.load()
     love.physics.setMeter(32)
     Entitaeten={}
     --for i = 0, 3 do
-    --   spawnEntitaet("kuh", 500, 300)
+      spawnEntitaet("kuh", 500, 300)
     --end
     spawnEntitaet("gehege")
     spawnEntitaet("spieler", 500, 50)
@@ -35,7 +35,7 @@ function love.draw()
    for i,v in ipairs(Entitaeten) do
     v:draw()
    end
-   zeichneInfo(1100,30)
+   zeichneInfo(1850,30)
    startscreen.draw()
    love.graphics.setFont(love.graphics.newFont("font.ttf"))   
 
@@ -100,7 +100,7 @@ end
 
 function love.mousepressed(x,y,button) 
     if button == 1 then
-        if x >= 1100 and x <= 1125 and y >= 30 and y <= 55 then
+        if x >= 1850 and x <= 1875 and y >= 30 and y <= 55 then
             schreibeInfo=true
             return true
         else 
@@ -225,13 +225,13 @@ function zeichneInfo(x,y)
     love.graphics.print("!",x+2,y-2,0,2)
     if schreibeInfo== true then
         love.graphics.setColor(0.5, 0.5, 0.5)
-        love.graphics.rectangle("fill", x, y, 400, 150)
+        love.graphics.rectangle("fill", x-400, y, 400, 150)
         love.graphics.setColor(1, 1, 1)
-        love.graphics.print("Info:", x+10, y+10)
-        love.graphics.print("1.Melken = Taste f drücken", x+10, y+30)
-        love.graphics.print("2.Schlachten = Taste q drücken", x+10, y+50)
-        love.graphics.print("3.Züchten = Taste e drücken", x+10, y+70)
-        love.graphics.print("4.Weizen Ernten = Taste e drücken", x+10, y+90)
+        love.graphics.print("Info:", x-390, y+10)
+        love.graphics.print("1.Melken = Taste f drücken", x-390, y+30)
+        love.graphics.print("2.Schlachten = Taste q drücken", x-390, y+50)
+        love.graphics.print("3.Züchten = Taste e drücken", x-390, y+70)
+        love.graphics.print("4.Weizen Ernten = Taste e drücken", x-390, y+90)
     end
 end
 
