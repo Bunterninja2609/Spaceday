@@ -170,8 +170,8 @@ function love.keypressed(key)
             mauspos = love.mouse.getPosition( ) 
             for i, v in ipairs(Entitaeten) do
                 if mauspos >= v.x and mauspos <= v.x+16 then
-                spieler.inventar.gehege = spieler.inventar.gehege +2
                 if v.type == "gehege" then
+                  spieler.inventar.gehege = spieler.inventar.gehege +2
                   v.IsAlive = false
                 end
             end
