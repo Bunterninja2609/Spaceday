@@ -1,4 +1,5 @@
 require "startscreen"
+require "Libraries/camera"
 function love.load()
     love.graphics.setDefaultFilter("nearest","nearest")
     World=love.physics.newWorld(0,0,true)
@@ -30,11 +31,14 @@ function love.load()
 end
 
 function love.draw()
+    camera.follow(spieler.x, spieler.y, true)
+    camera.init()
     boden()
     table.sort(Entitaeten, function(a, b) return a.body:getY() < b.body:getY() end) --!!diese Funktion sorgt dafür, dass die Entitaeten weiter hinten zuerst gezeichnet werden!!--
    for i,v in ipairs(Entitaeten) do
     v:draw()
    end
+   camera.exit()
    zeichneInfo(1100,30)
    startscreen.draw()
    love.graphics.setFont(love.graphics.newFont("font.ttf"))   
@@ -123,13 +127,16 @@ function platziereWeizen(x,y)
         end
     end 
     if canPlace == true then
-        spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
-        if spieler.inventar.geld < 5 then
+        
+        if spieler.inventar.geld < 5 and spieler.inventar.weizen > 2  then
             spieler.inventar.weizen = spieler.inventar.weizen -2
+            spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
         elseif spieler.inventar.geld >= 5 then
             spieler.inventar.geld = spieler.inventar.geld-5
+            spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
         end
     end
+    
 
 end  
 

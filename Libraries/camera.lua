@@ -1,4 +1,4 @@
-camera = {x = 0, y = 0, offsetX = 0, offsetY = 0,mouseX = 0, mouseY = 0, scale = 1}
+camera = {x = 0, y = 0, offsetX = 0, offsetY = 0,mouseX = 0, mouseY = 0, scale = 3}
 function camera.init()
     love.graphics.push() -- startet den einfluss der Kamera
     love.graphics.translate(-camera.x*camera.scale + camera.offsetX, -camera.y*camera.scale + camera.offsetY) -- versetzt den Bildschirm
