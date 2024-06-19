@@ -20,6 +20,7 @@ function spieler:load()
         wolle = 0,
         gehege = 20,
         weizen = 20,
+        level = 0
     }
     spieler.xp = 0
     self.nutzeShop = false
@@ -91,7 +92,7 @@ function zeichneShop(x,y)
                 love.graphics.print("Ei (+20 Geld)", x+10, y+110)
                 zeichneShopButton(x,y+110,verkauf)
             end
-            
+
         love.graphics.setColor(1,1,0)  
         love.graphics.print("Kaufen", x+250, y+10)
             love.graphics.setColor(1, 1, 1)
