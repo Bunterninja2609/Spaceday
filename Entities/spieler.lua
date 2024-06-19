@@ -29,6 +29,7 @@ function spieler:update(dt)
     bewegeSpieler(self.speed,self.body)
     shopTaste()
     level()
+    camera.follow(self.body:getX(), self.body:getY(), true)
 end
 
 function spieler:draw()

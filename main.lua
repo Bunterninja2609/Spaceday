@@ -31,7 +31,7 @@ function love.load()
 end
 
 function love.draw()
-    camera.follow(spieler.body:getX(), spieler.body:getY(), true)
+   
     camera.init()
     boden()
     table.sort(Entitaeten, function(a, b) return a.body:getY() < b.body:getY() end) --!!diese Funktion sorgt dafür, dass die Entitaeten weiter hinten zuerst gezeichnet werden!!--
@@ -109,15 +109,15 @@ end
 
 function love.mousepressed(x,y,button) 
     if button == 1 then
-        if x >= 1850 and x <= 1875 and y >= 30 and y <= 55 then
+        if camera.mouseX >= 1850 and camera.mouseX <= 1875 and camera.mouseY >= 30 and camera.mouseY <= 55 then
             schreibeInfo=true
             return true
         else 
-            platziereGehege(x,y)
+            platziereGehege(camera.mouseX,camera.mouseY)
         end
     end
     if button == 2 then
-        platziereWeizen(x,y)   
+        platziereWeizen(camera.mouseX,camera.mouseY)   
     end
 end
 
