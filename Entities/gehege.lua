@@ -24,7 +24,7 @@ function gehege:draw()
 end
 
 function zeichneGehege(xgehege,ygehege,gehegeBild)
-    love.graphics.setColor(1,1,0)
+    love.graphics.setColor(1,1,1)
     love.graphics.draw(gehegeBild,xgehege - 16,ygehege -  16,0,2)
     love.graphics.setColor(1,1,1)-- damit der boden nicht übermalt wird
 end

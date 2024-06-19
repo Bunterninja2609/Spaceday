@@ -6,9 +6,9 @@ function love.load()
     love.physics.setMeter(32)
     Entitaeten={}
     --for i = 0, 3 do
-      spawnEntitaet("kuh", 500, 300)
+      --spawnEntitaet("kuh", 500, 300)
     --end
-    spawnEntitaet("gehege")
+   -- spawnEntitaet("gehege")
     spawnEntitaet("spieler", 500, 50)
     --spawnEntitaet("weizen")
     --for i =0, 3 do
@@ -175,11 +175,16 @@ function love.keypressed(key)
         end 
     end
     if szene == 2 then
+    
         if key == "x" then
+            mauspos = love.mouse.getPosition( ) 
             for i, v in ipairs(Entitaeten) do
+                if mauspos >= v.x and mauspos <= v.x+16 then
                 if v.type == "gehege" then
+                  spieler.inventar.gehege = spieler.inventar.gehege +2
                   v.IsAlive = false
                 end
+            end
             end
         end
         if spieler.nutzeShop == true then 
@@ -242,8 +247,9 @@ function zeichneInfo(x,y)
         love.graphics.print("Info:", x-390, y+10)
         love.graphics.print("1.Melken = Taste f drücken", x-390, y+30)
         love.graphics.print("2.Schlachten = Taste q drücken", x-390, y+50)
-        love.graphics.print("3.Züchten = Taste e drücken", x-390, y+70)
+        love.graphics.print("3.Züchten = Taste z drücken", x-390, y+70)
         love.graphics.print("4.Weizen Ernten = Taste e drücken", x-390, y+90)
+        love.graphics.print("5.Shop= Taste k drücken", x-390, y+110)
     end
 end
 
