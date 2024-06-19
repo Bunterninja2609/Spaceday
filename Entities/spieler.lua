@@ -4,7 +4,7 @@ spieler={}
     spieler.y=300
     spieler.speed=100
     spieler.direction=1
-    spieler.spielerBild = love.graphics.newImage("Textures/spieler.png")
+    spieler.spielerBild = love.graphics.newImage("Textures/spielerS.png")
     
     
    
@@ -72,18 +72,22 @@ function bewegeSpieler(speed,body)
     local speedY = 0 
     if love.keyboard.isDown("w") then
         speedY = -speed
+        spieler.spielerBild = love.graphics.newImage("Textures/spielerW.png")
     elseif love.keyboard.isDown("s") then
         speedY = speed
+        spieler.spielerBild = love.graphics.newImage("Textures/spielerS.png")
     end
     if love.keyboard.isDown("a") then
         speedX = -speed
+        spieler.spielerBild = love.graphics.newImage("Textures/spielerA.png")
     elseif love.keyboard.isDown("d") then
         speedX = speed
+        spieler.spielerBild = love.graphics.newImage("Textures/spielerD.png")
     end
     body:setLinearVelocity(speedX,speedY)
 end
 function shopTaste()
-    if love.keyboard.isDown("k") then
+    if love.keyboard.isDown("g") then
         spieler.nutzeShop = true
     else
         spieler.nutzeShop = false
@@ -94,7 +98,7 @@ function zeichneLevel(w)
     if spieler.inventar.level==0 then
       love.graphics.setColor(1,0,0)
       love.graphics.rectangle("fill",10,170,w,10)
-      love.graphics.print("XP:".. spieler.xp .. "/100",10,190)
+      love.graphics.print("XP:".. spieler.xp .. "/50",10,190)
     end
     if spieler.inventar.level==1 then
         love.graphics.setColor(1,0,0)
@@ -110,7 +114,7 @@ end
 
 function level()
     
-    if spieler.xp> 100 and spieler.inventar.level == 0 then
+    if spieler.xp> 50 and spieler.inventar.level == 0 then
         spieler.inventar.level = spieler.inventar.level+1
         spieler.xp = 0
         for i = 0, 3 do

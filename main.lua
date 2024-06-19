@@ -35,9 +35,11 @@ function love.draw()
    for i,v in ipairs(Entitaeten) do
     v:draw()
    end
-   zeichneInfo(1850,30)
-   startscreen.draw()
-   love.graphics.setFont(love.graphics.newFont("font.ttf"))   
+    local screenWidth = love.graphics.getWidth()
+    local screenHeight = love.graphics.getHeight()
+    zeichneInfo(screenWidth-70,screenHeight-1050)
+     startscreen.draw()
+     love.graphics.setFont(love.graphics.newFont("font.ttf"))   
 
 end
 
@@ -163,11 +165,16 @@ function love.keypressed(key)
         end 
     end
     if szene == 2 then
+    
         if key == "x" then
+            mauspos = love.mouse.getPosition( ) 
             for i, v in ipairs(Entitaeten) do
+                if mauspos >= v.x and mauspos <= v.x+16 then
                 if v.type == "gehege" then
+                  spieler.inventar.gehege = spieler.inventar.gehege +2
                   v.IsAlive = false
                 end
+            end
             end
         end
         if spieler.nutzeShop == true then 
