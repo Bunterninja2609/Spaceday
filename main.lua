@@ -112,7 +112,7 @@ function love.mousepressed(x,y,button)
     if button == 1 then
         local screenWidth = love.graphics.getWidth()
         local screenHeight = love.graphics.getHeight()
-        if camera.mouseX >= screenWidth-70 and camera.mouseX <= screenWidth-70+25 and camera.mouseY >= 30 and camera.mouseY <= 55 then
+        if x >= screenWidth-70 and x <= screenWidth-70+25 and y >= 30 and y <= 55 then
             schreibeInfo=true
             return true
         else 
