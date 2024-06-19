@@ -16,6 +16,7 @@ function spieler:load()
         geld = 0,
         milch = 0,
         fleisch = 0,
+        ei = 0,
         wolle = 0,
         gehege = 20,
         weizen = 20,
@@ -47,10 +48,11 @@ function zeichneInventar()
     love.graphics.print("Geld: " .. spieler.inventar.geld, 10, 30)
     love.graphics.print("Milch: " .. spieler.inventar.milch, 10, 50)
     love.graphics.print("Fleisch: " .. spieler.inventar.fleisch, 10, 70)
-    love.graphics.print("Wolle: " .. spieler.inventar.wolle, 10, 90)
-    love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 110)
-    love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 130)
-    love.graphics.print("Level: " .. spieler.inventar.level, 10, 150)
+    love.graphics.print("Ei: " .. spieler.inventar.ei, 10, 90)
+    love.graphics.print("Wolle: " .. spieler.inventar.wolle, 10, 110)
+    love.graphics.print("Gehege: " .. spieler.inventar.gehege, 10, 130)
+    love.graphics.print("Weizen: " .. spieler.inventar.weizen, 10, 150)
+    love.graphics.print("Level: " .. spieler.inventar.level, 10, 170)
 end
 function zeichneShop(x,y)
     if spieler.nutzeShop == true then
@@ -60,7 +62,9 @@ function zeichneShop(x,y)
         love.graphics.print("Shop:", x+10, y+10)
         love.graphics.print("1. Milch verkaufen (+10 Geld)", x+10, y+30)
         love.graphics.print("2. Fleisch verkaufen (+20 Geld)", x+10, y+50)
-        love.graphics.print("4. Weizen verkaufen (+5 Geld)", x+10, y+70)
+        love.graphics.print("3. Ei verkaufen (+20 Geld)", x+10, y+70)
+        love.graphics.print("4. Wolle verkaufen (+20 Geld)", x+10, y+90)
+        love.graphics.print("5. Weizen verkaufen (+5 Geld)", x+10, y+110)
     end
 end
 

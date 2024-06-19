@@ -5,10 +5,12 @@ local schaf={}
     schaf.speed=10
     schaf.direction=math.random()*2*math.pi
     schaf.IsAlive=true
+    schaf.BekommtWolle=false
     schaf.passiert=false
     schaf.breedTimer = 0
     schaf.timer = 0
     schaf.schafBild = love.graphics.newImage("Textures/schaf 0.png")
+    schaf.wolleBild = love.graphics.newImage("Textures/wolle.png")
     schafe={}
 
 function schaf:load()
@@ -61,7 +63,7 @@ function schaf:checkObWeizenGegeben(entity1,entity2)
         spawnEntitaet("schaf",newX,newY)
         entity1.breedTimer = 0
         entity2.breedTimer = 0
-        spieler.inventar.weizen = spieler.inventar.weizen - 4 --!!es kostet weizen !!--
+        spieler.inventar.weizen = spieler.inventar.weizen - 4 
         spieler.xp = spieler.xp + 0.5
     end
 end
@@ -73,6 +75,9 @@ function schaf:Wolle(dt)
           self.timer=self.timer+dt
           spieler.inventar.wolle= spieler.inventar.wolle+1
           self.schafBild=love.graphics.newImage("Textures/schaf 1.png")
+          self.BekommtWolle=true
+        else
+            self.BekommtWolle = false
     end
 end
 
@@ -93,7 +98,14 @@ function schaf:draw()
     local xNeu =  self.schafBild:getWidth()
     local yNeu =  self.schafBild:getHeight()
     zeichneSchafe(self.x-xNeu,self.y-yNeu,self.schafBild)
+    if self.BekommtWolle== true then 
+        zeichneWolle(self.x+10,self.y+10,self.wolleBild)
+     end
     end
+end
+
+function zeichneWolle(x,y,wolleBild)
+    love.graphics.draw(wolleBild,x,y)
 end
 
 function zeichneSchafe(x,y,schafBild)

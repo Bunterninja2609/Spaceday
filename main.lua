@@ -6,16 +6,17 @@ function love.load()
     love.physics.setMeter(32)
     Entitaeten={}
     --for i = 0, 3 do
-      --spawnEntitaet("kuh", 500, 300)
+      spawnEntitaet("kuh", 500, 300)
     --end
    -- spawnEntitaet("gehege")
     spawnEntitaet("spieler", 500, 50)
     --spawnEntitaet("weizen")
     --for i =0, 3 do
-     --   spawnEntitaet("schwein",600,300)
+        spawnEntitaet("schwein",600,300)
     --end
     --for i =0,3 do
-       -- spawnEntitaet("schaf",400,400)
+     spawnEntitaet("schaf",400,400)
+     spawnEntitaet("huhn",400,400)
     --end
     startscreen.load()
     zeit=0
@@ -206,13 +207,20 @@ function love.keypressed(key)
                 end
             end
             if key == "3" then
+                if spieler.inventar.ei > 0 then
+                    spieler.inventar.ei = spieler.inventar.ei - 1
+                    spieler.inventar.geld = spieler.inventar.geld + 15
+                    love.audio.play(geldSound)
+                end
+            end
+            if key == "4" then
                 if spieler.inventar.wolle > 0 then
                     spieler.inventar.wolle = spieler.inventar.wolle - 1
                     spieler.inventar.geld = spieler.inventar.geld + 15
                     love.audio.play(geldSound)
                 end
             end
-            if key == "4" then
+            if key == "5" then
                 if spieler.inventar.weizen > 0 then
                     spieler.inventar.weizen = spieler.inventar.weizen - 1
                     spieler.inventar.geld = spieler.inventar.geld + 5

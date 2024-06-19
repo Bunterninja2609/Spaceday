@@ -4,8 +4,9 @@ local huhn={}
     huhn.y=500
     huhn.speed=30 
     huhn.direction=math.random()*2*math.pi
-    huhn.isMelking = false
+    huhn.ei = false
     huhn.huhnBild = love.graphics.newImage("Textures/huhn.png")
+    huhn.eiBild = love.graphics.newImage("Textures/ei.png")
     huhn.IsAlive=true
     huhn.timer=0
     huhn.breedTimer=0 
@@ -45,11 +46,11 @@ function huhn:Eier(dt)
     local distance = love.physics.getDistance(self.fixture,spieler.fixture)
      if distance < 80 and love.keyboard.isDown("f") and self.timer < 0.4 then
           self.timer=self.timer+dt
-          spieler.inventar.milch= spieler.inventar.milch+1
+          spieler.inventar.ei= spieler.inventar.ei+1
           spieler.xp = spieler.xp + 0.5
-          self.isMelking = true
+          self.ei = true
     else
-        self.isMelking = false
+        self.ei = false
     end
 end
 
@@ -59,8 +60,8 @@ function huhn:draw()
     local xNeu =  self.huhnBild:getWidth()
     local yNeu =  self.huhnBild:getHeight()
     zeichneHuhn(self.x-xNeu,self.y-yNeu,self.huhnBild)
-     if self.isMelking == true then 
-        zeichneMilch(self.x+30,self.y+30,10)
+     if self.ei == true then 
+        zeichneEi(self.x+10,self.y+10,self.eiBild)
      end
     end
 end
@@ -97,15 +98,14 @@ function huhn:checkObWeizenGegeben(entity1,entity2)
         spawnEntitaet("huhn",newX,newY)
         entity1.breedTimer = 0
         entity2.breedTimer = 0
-        spieler.inventar.weizen = spieler.inventar.weizen - 4 --!!es kostet weizen !!--
+        spieler.inventar.weizen = spieler.inventar.weizen - 4 
         spieler.xp = spieler.xp + 0.5
     end
 end
 
 
-function zeichneMilch(x,y,r)
-    love.graphics.setColor(1,1,1)
-    love.graphics.circle("fill",x,y,r)
+function zeichneEi(x,y,eiBild)
+    love.graphics.draw(eiBild,x,y)
 end
 
 function zeichneHuhn(x,y,huhnBild)

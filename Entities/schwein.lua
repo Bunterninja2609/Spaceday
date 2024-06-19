@@ -5,8 +5,10 @@ local schwein={}
     schwein.speed=10
     schwein.direction=math.random()*2*math.pi
     schwein.IsAlive=true
+    schwein.IstGeschlachtet=false
     schwein.breedTimer=0
     schwein.schweinBild = love.graphics.newImage("Textures/schwein.png")
+    schwein.fleisch = love.graphics.newImage("Textures/fleisch.png")
     schweine={}
 
 function schwein:load()
@@ -18,7 +20,7 @@ end
 function schwein:update(dt)
     if self.IsAlive == true then
     self.breedTimer = self.breedTimer + dt
-    self:Schlachten()
+    self:Schlachten(dt)
     bewegeSchwein(self,self.speed)
     self:checkForBreeding(Entitaeten)
     end
@@ -63,25 +65,32 @@ function schwein:checkObWeizenGegeben(entity1,entity2)
     end
 end
 
-function schwein:Schlachten()
+function schwein:Schlachten(dt)
     self.x,self.y = self.body:getPosition()
     local distance = love.physics.getDistance(self.fixture,spieler.fixture)
-    if distance < 100 and love.keyboard.isDown("q") then
+     if distance < 100 and love.keyboard.isDown("q") then
         spieler.inventar.fleisch = spieler.inventar.fleisch + 1
         spieler.xp = spieler.xp + 0.5
         self.IsAlive = false
-    end
+        self.IstGeschlachtet=true
+     end
 end
 
 function schwein:draw()
     if self.IsAlive== true then
-    self.x,self.y = self.body:getPosition()
-    local xNeu =  self.schweinBild:getWidth()
-    local yNeu =  self.schweinBild:getHeight()
-    zeichneSchwein(self.x-xNeu,self.y-yNeu,self.schweinBild)
+     self.x,self.y = self.body:getPosition()
+     local xNeu =  self.schweinBild:getWidth()
+     local yNeu =  self.schweinBild:getHeight()
+     zeichneSchwein(self.x-xNeu,self.y-yNeu,self.schweinBild)
+    end
+    if self.IsAlive==false and self.IstGeschlachtet then 
+        zeichneFleisch(self.x+10,self.y+10,self.fleisch)
     end
 end
 
+function zeichneFleisch(x,y,fleischBild)
+    love.graphics.draw(fleischBild,x,y,0,2)
+end
 
 function zeichneSchwein(x,y,schweinBild)
     love.graphics.draw(schweinBild,x,y,0,2)

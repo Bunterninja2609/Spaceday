@@ -6,9 +6,10 @@ local kuh={}
     kuh.direction=math.random()*2*math.pi
     kuh.isMelking = false
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
+    kuh.milchBild = love.graphics.newImage("Textures/milch.png")
     kuh.IsAlive=true
     kuh.timer=0
-    kuh.breedTimer=0 --!! tmer, damit nicht die ganze zeit neue Kühe spawnen !!--
+    kuh.breedTimer=0 
     kuehe={}
 
 
@@ -60,7 +61,7 @@ function kuh:draw()
     local yNeu =  self.kuhBild:getHeight()
     zeichneKuh(self.x-xNeu,self.y-yNeu,self.kuhBild)
      if self.isMelking == true then 
-        zeichneMilch(self.x+30,self.y+30,10)
+        zeichneMilch(self.x+10,self.y+10,self.milchBild)
      end
     end
 end
@@ -97,15 +98,14 @@ function kuh:checkObWeizenGegeben(entity1,entity2)
         spawnEntitaet("kuh",newX,newY)
         entity1.breedTimer = 0
         entity2.breedTimer = 0
-        spieler.inventar.weizen = spieler.inventar.weizen - 4 --!!es kostet weizen !!--
+        spieler.inventar.weizen = spieler.inventar.weizen - 4 
         spieler.xp = spieler.xp + 0.5
     end
 end
 
 
-function zeichneMilch(x,y,r)
-    love.graphics.setColor(1,1,1)
-    love.graphics.circle("fill",x,y,r)
+function zeichneMilch(x,y,milchBild)
+    love.graphics.draw(milchBild,x,y)
 end
 
 function zeichneKuh(xKuh,yKuh,kuhBild)
