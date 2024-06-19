@@ -2,7 +2,7 @@ local kuh={}
     kuh.type = "kuh"
     kuh.x=500
     kuh.y=500
-    kuh.speed=10
+    kuh.speed=30 
     kuh.direction=math.random()*2*math.pi
     kuh.isMelking = false
     kuh.kuhBild = love.graphics.newImage("Textures/kuh.png")
@@ -91,7 +91,7 @@ end
 function kuh:checkObWeizenGegeben(entity1,entity2)
     local distanceToPlayer1 = love.physics.getDistance(entity1.fixture,spieler.fixture)
     local distanceToPlayer2 = love.physics.getDistance(entity2.fixture,spieler.fixture)
-    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("e") and entity1.breedTimer > 10 and entity2.breedTimer > 10 and spieler.inventar.weizen >= 4 then
+    if distanceToPlayer1 < 100 and distanceToPlayer2 < 100 and love.keyboard.isDown("z") and entity1.breedTimer > 10 and entity2.breedTimer > 10 and spieler.inventar.weizen >= 4 then
         local newX = (entity1.x + entity2.x) / 2 + 20
         local newY = (entity1.y + entity2.y) / 2 + 20
         spawnEntitaet("kuh",newX,newY)

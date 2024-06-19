@@ -230,8 +230,9 @@ function zeichneInfo(x,y)
         love.graphics.print("Info:", x-390, y+10)
         love.graphics.print("1.Melken = Taste f drücken", x-390, y+30)
         love.graphics.print("2.Schlachten = Taste q drücken", x-390, y+50)
-        love.graphics.print("3.Züchten = Taste e drücken", x-390, y+70)
+        love.graphics.print("3.Züchten = Taste z drücken", x-390, y+70)
         love.graphics.print("4.Weizen Ernten = Taste e drücken", x-390, y+90)
+        love.graphics.print("5.Shop= Taste k drücken", x-390, y+110)
     end
 end
 
