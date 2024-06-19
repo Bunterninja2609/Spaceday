@@ -57,7 +57,7 @@ end
 function zeichneShop(x,y)
     if spieler.nutzeShop == true then
         love.graphics.setColor(0.5, 0.5, 0.5)
-        love.graphics.rectangle("fill", x, y, 400, 100)
+        love.graphics.rectangle("fill", x, y, 400, 150)
         love.graphics.setColor(1, 1, 1)
         love.graphics.print("Shop:", x+10, y+10)
         love.graphics.print("1. Milch verkaufen (+10 Geld)", x+10, y+30)
