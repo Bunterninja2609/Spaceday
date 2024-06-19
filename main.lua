@@ -31,23 +31,23 @@ function love.load()
 end
 
 function love.draw()
-   
     camera.init()
     boden()
     table.sort(Entitaeten, function(a, b) return a.body:getY() < b.body:getY() end) --!!diese Funktion sorgt dafür, dass die Entitaeten weiter hinten zuerst gezeichnet werden!!--
-   for i,v in ipairs(Entitaeten) do
-    v:draw()
-   end
-   camera.exit()
-   zeichneInfo(1100,30)
-   startscreen.draw()
-   love.graphics.setFont(love.graphics.newFont("font.ttf"))   
+    for i,v in ipairs(Entitaeten) do
+        v:draw()
+    end
+    camera.exit()
+    startscreen.draw()
+    love.graphics.setFont(love.graphics.newFont("font.ttf"))   
     local screenWidth = love.graphics.getWidth()
     local screenHeight = love.graphics.getHeight()
-    zeichneInfo(screenWidth-70,screenHeight-1050)
-     startscreen.draw()
-     love.graphics.setFont(love.graphics.newFont("font.ttf"))   
-
+    zeichneInfo(screenWidth-70,30)
+    zeichneInventar() 
+    zeichneLevel(spieler.xp)
+    zeichneShop(screenWidth-450,50)
+    startscreen.draw()
+    love.graphics.setFont(love.graphics.newFont("font.ttf"))  
 end
 
 
@@ -109,7 +109,9 @@ end
 
 function love.mousepressed(x,y,button) 
     if button == 1 then
-        if camera.mouseX >= 1850 and camera.mouseX <= 1875 and camera.mouseY >= 30 and camera.mouseY <= 55 then
+        local screenWidth = love.graphics.getWidth()
+        local screenHeight = love.graphics.getHeight()
+        if camera.mouseX >= screenWidth-70 and camera.mouseX <= screenWidth-70+25 and camera.mouseY >= 30 and camera.mouseY <= 55 then
             schreibeInfo=true
             return true
         else 
@@ -163,6 +165,7 @@ function boden()
    local bodenHoehe = boden:getHeight()*2
     for x=0,bildschirmBreite,bodenBreite do
       for y=0, bildschirmHoehe,bodenHoehe do
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(boden,x,y,0,2)
       end
     end
