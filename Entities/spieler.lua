@@ -94,7 +94,7 @@ function zeichneLevel(w)
     if spieler.inventar.level==0 then
       love.graphics.setColor(1,0,0)
       love.graphics.rectangle("fill",10,170,w,10)
-      love.graphics.print("XP:".. spieler.xp .. "/100",10,190)
+      love.graphics.print("XP:".. spieler.xp .. "/50",10,190)
     end
     if spieler.inventar.level==1 then
         love.graphics.setColor(1,0,0)
@@ -110,7 +110,7 @@ end
 
 function level()
     
-    if spieler.xp> 100 and spieler.inventar.level == 0 then
+    if spieler.xp> 50 and spieler.inventar.level == 0 then
         spieler.inventar.level = spieler.inventar.level+1
         spieler.xp = 0
         for i = 0, 3 do
