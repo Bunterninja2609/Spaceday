@@ -26,6 +26,11 @@ function spieler:load()
     self.nutzeShop = false
     kaufButtons = {}
     verkaufButtons ={}
+    spieler.weizenBild = love.graphics.newImage("Textures/weizen.png")
+    spieler.milchBild = love.graphics.newImage("Textures/milch.png")
+    spieler.fleischBild = love.graphics.newImage("Textures/fleisch.png")
+    spieler.wolleBild = love.graphics.newImage("Textures/wolle.png")
+    spieler.eiBild = love.graphics.newImage("Textures/ei.png")
 end
 
 function spieler:update(dt)
@@ -81,19 +86,26 @@ function zeichneShop(x,y)
         love.graphics.print("Verkaufen", x+10, y+10)
         love.graphics.setColor(1, 1, 1)
             love.graphics.print("Weizen (+7 Geld)", x+10, y+30)
+            love.graphics.setColor(1, 1, 0)
+            love.graphics.draw(spieler.weizenBild,x+180,y+30,0,0.7)
+            love.graphics.setColor(1, 1, 1)
             zeichneVerkaufButton(x,y+30,verkaufeWeizen)
             if spieler.inventar.level >= 1 then
                 love.graphics.print("Milch (+10 Geld)", x+10, y+50)
+                love.graphics.draw(spieler.milchBild,x+180,y+50)
                 zeichneVerkaufButton(x,y+50,verkaufeMilch)
                 love.graphics.print("Fleisch (+20 Geld)", x+10, y+70)
+                love.graphics.draw(spieler.fleischBild,x+180,y+70,0,1.2)
                 zeichneVerkaufButton(x,y+70,verkaufeFleisch)
             end
             if spieler.inventar.level >= 3 then
                 love.graphics.print("Wolle (+15 Geld)", x+10, y+90)
+                love.graphics.draw(spieler.wolleBild,x+180,y+90)
                 zeichneVerkaufButton(x,y+90,verkaufeWolle)
             end
             if spieler.inventar.level >= 4 then
                 love.graphics.print("Ei (+15 Geld)", x+10, y+110)
+                love.graphics.draw(spieler.eiBild,x+180,y+110)
                 zeichneVerkaufButton(x,y+110,verkaufeEi)
             end
 
