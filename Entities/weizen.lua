@@ -7,10 +7,12 @@ local weizen={}
     weizen.farbeGruen = 205
     weizen.farbeBlau = 50
     weizen.farbeRot = 154
-
-    weizen.distance = 0
     --weizen.farbe = {154/255,205/255,50/255} Anfang
     --weizen.farbe = {218/255,165/255,32/255} Ende
+
+
+    weizen.distance = 0
+
 
     weizen.weizenBild = love.graphics.newImage("Textures/weizen.png")
    
@@ -19,7 +21,7 @@ function weizen:load()
     self.shape = love.physics.newRectangleShape(16,16)
     self.fixture = love.physics.newFixture(self.body,self.shape)
     self.fixture:setMask(1)
-    weizenMinus()
+    
 end
 
 function weizen:update(dt)
@@ -51,13 +53,6 @@ end
 function weizen:draw()
     self.x,self.y = self.body:getPosition( )
     zeichneWeizen(self.farbeRot/256,self.farbeGruen/256,self.farbeBlau/256,self.x,self.y,self.weizenBild) 
-    --[[Orientierung
-    love.graphics.print(self.farbeGruen,600,300)
-    love.graphics.print(self.wachsTimer,600,600)
-    love.graphics.print(self.farbeBlau,600,500)
-    love.graphics.print(self.farbeRot,600,400)
-    love.graphics.print(self.distance,600,700)
-    ]]--
 end
 
 function zeichneWeizen(fa1,fa2,fa3,xweizen,yweizen,weizenBild)
@@ -80,10 +75,6 @@ function weizen:ernten()
 
 end
 
-function weizenMinus()
-    if spieler.inventar.weizen < 0 then
-        spieler.inventar.level = spieler.inventar.level-1
-    end
-end
+
 
 return weizen

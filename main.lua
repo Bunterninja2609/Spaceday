@@ -194,7 +194,7 @@ function love.keypressed(key)
     if szene == 2 then
     
         if key == "x" then
-            mauspos = love.mouse.getPosition( ) 
+            mauspos = {x = camera.mouseX, y = camera.mouseY}
             for i, v in ipairs(Entitaeten) do
                 if mauspos >= v.x and mauspos <= v.x+16 then
                     if v.type == "gehege" then
@@ -234,7 +234,7 @@ function zeichneInfo(x,y)
         love.graphics.print("2.Schlachten = Taste q drücken", x-390, y+50)
         love.graphics.print("3.Züchten = Taste z drücken", x-390, y+70)
         love.graphics.print("4.Weizen Ernten = Taste e drücken", x-390, y+90)
-        love.graphics.print("5.Shop= Taste k drücken", x-390, y+110)
+        love.graphics.print("5.Shop= Taste g drücken", x-390, y+110)
     end
 end
 
