@@ -24,6 +24,8 @@ function spieler:load()
     }
     spieler.xp = 0
     self.nutzeShop = false
+    kaufButtons = {}
+    verkaufButtons ={}
 end
 
 function spieler:update(dt)
@@ -66,6 +68,8 @@ function zeichneInventar()
     love.graphics.print("Level: " .. spieler.inventar.level, 10, 170)
 end
 function zeichneShop(x,y)
+    kaufButtons = {} 
+    verkaufButtons = {}
     if spieler.nutzeShop == true then
         love.graphics.setColor(0.5, 0.5, 0.5)
         love.graphics.rectangle("fill", x, y, 500, 150)
@@ -77,63 +81,65 @@ function zeichneShop(x,y)
         love.graphics.print("Verkaufen", x+10, y+10)
         love.graphics.setColor(1, 1, 1)
             love.graphics.print("Weizen (+7 Geld)", x+10, y+30)
-            zeichneShopButton(x,y+30,verkauf)
+            zeichneVerkaufButton(x,y+30,verkaufeWeizen)
             if spieler.inventar.level >= 1 then
                 love.graphics.print("Milch (+10 Geld)", x+10, y+50)
-                zeichneShopButton(x,y+50,verkauf)
+                zeichneVerkaufButton(x,y+50,verkaufeMilch)
                 love.graphics.print("Fleisch (+15 Geld)", x+10, y+70)
-                zeichneShopButton(x,y+70,verkauf)
+                zeichneVerkaufButton(x,y+70,verkaufeFleisch)
             end
             if spieler.inventar.level >= 3 then
                 love.graphics.print("Wolle (+20 Geld)", x+10, y+90)
-                zeichneShopButton(x,y+90,verkauf)
+                zeichneVerkaufButton(x,y+90,verkaufeWolle)
             end
             if spieler.inventar.level >= 4 then
                 love.graphics.print("Ei (+20 Geld)", x+10, y+110)
-                zeichneShopButton(x,y+110,verkauf)
+                zeichneVerkaufButton(x,y+110,verkaufeEi)
             end
 
         love.graphics.setColor(1,1,0)  
         love.graphics.print("Kaufen", x+250, y+10)
             love.graphics.setColor(1, 1, 1)
             love.graphics.print("Weizen (-5 Geld)", x+250, y+30)
-            zeichneShopButton(x,y+30,kauf)
+            zeichneKaufButton(x,y+30,kaufeWeizen)
             love.graphics.print("Gehege (-5 Geld)", x+250, y+50)
-            zeichneShopButton(x,y+50,kauf)
+            zeichneKaufButton(x,y+50,kaufeGehege)
             if spieler.inventar.level >= 1 then
                 love.graphics.print("Kuh (-50 Geld)", x+250, y+70)
-                zeichneShopButton(x,y+70,kauf)
+                zeichneKaufButton(x,y+70,kaufeKuh)
             end
             if spieler.inventar.level >= 2 then
                 love.graphics.print("Schwein (-30 Geld)", x+250, y+90)
-                zeichneShopButton(x,y+90,kauf)
+                zeichneKaufButton(x,y+90,kaufeSchwein)
             end
             if spieler.inventar.level >= 3 then
                 love.graphics.print("Schaf (-70 Geld)", x+250, y+110)
-                zeichneShopButton(x,y+110,kauf)
+                zeichneKaufButton(x,y+110,kaufeSchaf)
             end
             if spieler.inventar.level >= 4 then
                 love.graphics.print("Huhn (-80 Geld)", x+250, y+130)
-                zeichneShopButton(x,y+130,kauf)
+                zeichneKaufButton(x,y+130,kaufeHuhn)
             end
     end
 end
-function zeichneShopButton(x,y,modus)
-    if modus == verkauf then
-    love.graphics.setColor(0,1,0)
-    love.graphics.rectangle("fill", x+200, y , 25,15)
-    love.graphics.setColor(0,0.4,0)
-    love.graphics.rectangle("line", x+200, y , 25,15)
-    love.graphics.print("-1",x+200,y)
-    end
-    if modus == kauf then
-        love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill", x+450, y , 25,15)
-        love.graphics.setColor(0.4,0,0)
-        love.graphics.rectangle("line", x+450, y , 25,15)
-        love.graphics.print("+1",x+450,y)
-    end
-    love.graphics.setColor(1,1,1)
+function zeichneKaufButton(x, y, action)
+    table.insert(kaufButtons, {x = x + 450, y = y, width = 25, height = 15, action = action})
+    love.graphics.setColor(1, 0, 0)
+    love.graphics.rectangle("fill", x + 450, y, 25, 15)
+    love.graphics.setColor(0.4, 0, 0)
+    love.graphics.rectangle("line", x + 450, y, 25, 15)
+    love.graphics.print("+1", x + 450, y)
+    love.graphics.setColor(1, 1, 1)
+end
+
+function zeichneVerkaufButton(x, y, action)
+    table.insert(verkaufButtons, {x = x + 200, y = y, width = 25, height = 15, action = action})
+    love.graphics.setColor(0, 1, 0)
+    love.graphics.rectangle("fill", x + 200, y, 25, 15)
+    love.graphics.setColor(0, 0.4, 0)
+    love.graphics.rectangle("line", x + 200, y, 25, 15)
+    love.graphics.print("-1", x + 200, y)
+    love.graphics.setColor(1, 1, 1)
 end
 
 

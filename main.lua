@@ -30,6 +30,8 @@ function love.load()
     soundTimer[2].sound = love.audio.newSource("Textures/schafSound.mp3", "static")
     soundTimer[3].sound = love.audio.newSource("Textures/schweinSound.mp3", "static")
     geldSound=love.audio.newSource("Textures/geldSound.mp3","static")
+    screenWidth = love.graphics.getWidth()
+    screenHeight = love.graphics.getHeight()
 end
 
 function love.draw()
@@ -43,8 +45,6 @@ function love.draw()
     startscreen.draw()
     love.graphics.setBackgroundColor(58/255, 68/255, 102/255)
     love.graphics.setFont(love.graphics.newFont("font.ttf"))   
-    local screenWidth = love.graphics.getWidth()
-    local screenHeight = love.graphics.getHeight()
     zeichneInfo(screenWidth-70,30)
     zeichneInventar() 
     zeichneLevel(spieler.xp)
@@ -110,79 +110,39 @@ function findEntityByType(typ)
     end
 end
 
-function love.mousepressed(x,y,button) 
+function love.mousepressed(x, y, button) 
     if button == 1 then
-        local screenWidth = love.graphics.getWidth()
-        local screenHeight = love.graphics.getHeight()
-        if x >= screenWidth-70 and x <= screenWidth-70+25 and y >= 30 and y <= 55 then
-            schreibeInfo=true
-            return true
-        elseif nutzeShop == true then
-            if x>=screenWidth-550+200 and x<=screenWidth-550+225 then
-                if y>=50+30 and y<=50+55 then
-                    if spieler.inventar.weizen > 0 then
-                        spieler.inventar.weizen = spieler.inventar.weizen - 1
-                        spieler.inventar.geld = spieler.inventar.geld + 7
-                        love.audio.play(geldSound)
-                    end
-                elseif y>=50+50 and y<=50+75 then
-                    if spieler.inventar.milch > 0 then
-                        spieler.inventar.milch = spieler.inventar.milch - 10
-                        spieler.inventar.geld = spieler.inventar.geld + 7
-                        love.audio.play(geldSound)
-                    end
-                elseif y>=50+70 and y<=50+95 then
-                    if spieler.inventar.fleisch > 0 then
-                        spieler.inventar.fleisch = spieler.inventar.fleisch - 1
-                        spieler.inventar.geld = spieler.inventar.geld + 20
-                        love.audio.play(geldSound)
-                    end
-                elseif y>=50+90 and y<=50+115 then
-                    if spieler.inventar.wolle > 0 then
-                        spieler.inventar.wolle = spieler.inventar.wolle - 1
-                        spieler.inventar.geld = spieler.inventar.geld + 15
-                        love.audio.play(geldSound)
-                    end
-                elseif y>=50+110 and y<=50+135 then
-                    if spieler.inventar.ei > 0 then
-                        spieler.inventar.ei = spieler.inventar.ei - 1
-                        spieler.inventar.geld = spieler.inventar.geld + 15
-                        love.audio.play(geldSound)
-                    end
-                end
-            elseif x>=screenWidth-550+450 and x<=screenWidth-550+475 then
-                if y>=50+30 and y<=50+55 then
-                    if spieler.inventar.weizen > 0 then
-                        spieler.inventar.weizen = spieler.inventar.weizen + 1
-                        spieler.inventar.geld = spieler.inventar.geld - 5
-                        love.audio.play(geldSound)
-                    end
-                elseif y>=50+50 and y<=50+75 then
-                    if spieler.inventar.gehege > 0 then
-                        spieler.inventar.gehege = spieler.inventar.gehege + 1
-                        spieler.inventar.geld = spieler.inventar.geld -5
-                        love.audio.play(geldSound)
-                    end
-                elseif y>=50+70 and y<=50+95 and spieler.inventar.level==1 then
-                    spieler.inventar.geld = spieler.inventar.geld -50
-                        love.audio.play(geldSound)
-                elseif y>=50+90 and y<=50+115  and spieler.inventar.level==2 then
-                    spieler.inventar.geld = spieler.inventar.geld -30
-                        love.audio.play(geldSound)
-                elseif y>=50+110 and y<=50+135 and spieler.inventar.level==3  then
-                    spieler.inventar.geld = spieler.inventar.geld -70
-                        love.audio.play(geldSound)
-                elseif y>=50+130 and y<=50+155 and spieler.inventar.level==4  then
-                    spieler.inventar.geld = spieler.inventar.geld -80
-                        love.audio.play(geldSound)
+        local buttonClicked = false
+        
+        for i, btn in ipairs(kaufButtons) do
+            if x >= btn.x and x <= btn.x + btn.width and y >= btn.y and y <= btn.y + btn.height then
+                btn.action()
+                buttonClicked = true
+                break --beendet Schleife
+            end
+        end
+
+        if not buttonClicked then
+            for i, btn in ipairs(verkaufButtons) do
+                if x >= btn.x and x <= btn.x + btn.width and y >= btn.y and y <= btn.y + btn.height then
+                    btn.action()
+                    buttonClicked = true
+                    break
                 end
             end
-        else
-            platziereGehege(camera.mouseX,camera.mouseY)
+        end
+
+        if not buttonClicked then
+            if x >= screenWidth - 70 and x <= screenWidth - 70 + 25 and y >= 30 and y <= 55 then
+                schreibeInfo = true
+            else
+                platziereGehege(camera.mouseX, camera.mouseY)
+            end
         end
     end
+    
     if button == 2 then
-        platziereWeizen(camera.mouseX,camera.mouseY)   
+        platziereWeizen(camera.mouseX, camera.mouseY)   
     end
 end
 
@@ -252,49 +212,10 @@ function love.keypressed(key)
             end
             end
         end
-        --[[if spieler.nutzeShop == true then 
-            if key == "1" then
-                if spieler.inventar.milch > 0 then
-                    spieler.inventar.milch = spieler.inventar.milch - 1
-                    spieler.inventar.geld = spieler.inventar.geld + 10
-                    love.audio.play(geldSound)
-                end
-            end
-            if key == "2" then
-                if spieler.inventar.fleisch > 0 then
-                    spieler.inventar.fleisch = spieler.inventar.fleisch - 1
-                    spieler.inventar.geld = spieler.inventar.geld + 20
-                    love.audio.play(geldSound)
-                end
-            end
-            if key == "3" then
-                if spieler.inventar.ei > 0 then
-                    spieler.inventar.ei = spieler.inventar.ei - 1
-                    spieler.inventar.geld = spieler.inventar.geld + 15
-                    love.audio.play(geldSound)
-                end
-            end
-            if key == "4" then
-                if spieler.inventar.wolle > 0 then
-                    spieler.inventar.wolle = spieler.inventar.wolle - 1
-                    spieler.inventar.geld = spieler.inventar.geld + 15
-                    love.audio.play(geldSound)
-                end
-            end
-            if key == "5" then
-                if spieler.inventar.weizen > 0 then
-                    spieler.inventar.weizen = spieler.inventar.weizen - 1
-                    spieler.inventar.geld = spieler.inventar.geld + 5
-                    love.audio.play(geldSound)
-                end
-            end
-        end]]--
     end
 end
 
 function screenNichtVerlassen(entitaet)
-    local screenWidth = love.graphics.getWidth()
-    local screenHeight = love.graphics.getHeight()
     local x, y = entitaet.body:getPosition()
     if x < 0 then
         x = screenWidth
@@ -353,5 +274,93 @@ function audioAbspielen(dt)
                 sounds.timer = sounds.timer - sounds.interval  
             end
         end
+    end
+end
+function verkaufeWeizen()
+    if spieler.inventar.weizen > 0 then
+        spieler.inventar.weizen = spieler.inventar.weizen - 1
+        spieler.inventar.geld = spieler.inventar.geld + 7
+        love.audio.play(geldSound)
+        verkaufe = false
+    end
+end
+
+function verkaufeMilch()
+    if spieler.inventar.milch > 0 then
+        spieler.inventar.milch = spieler.inventar.milch - 10
+        spieler.inventar.geld = spieler.inventar.geld + 7
+        love.audio.play(geldSound)
+    end
+end
+
+function verkaufeFleisch()
+    if spieler.inventar.fleisch > 0 then
+        spieler.inventar.fleisch = spieler.inventar.fleisch - 1
+        spieler.inventar.geld = spieler.inventar.geld + 20
+        love.audio.play(geldSound)
+    end
+end
+
+function verkaufeWolle()
+    if spieler.inventar.wolle > 0 then
+        spieler.inventar.wolle = spieler.inventar.wolle - 1
+        spieler.inventar.geld = spieler.inventar.geld + 15
+        love.audio.play(geldSound)
+    end
+end
+
+function verkaufeEi()
+    if spieler.inventar.ei > 0 then
+        spieler.inventar.ei = spieler.inventar.ei - 1
+        spieler.inventar.geld = spieler.inventar.geld + 15
+        love.audio.play(geldSound)
+    end
+end
+
+function kaufeWeizen()
+    if spieler.inventar.geld >= 5 then
+        spieler.inventar.weizen = spieler.inventar.weizen + 1
+        spieler.inventar.geld = spieler.inventar.geld - 5
+        love.audio.play(geldSound)
+    end
+end
+
+function kaufeGehege()
+    if spieler.inventar.geld >= 5 then
+        spieler.inventar.gehege = spieler.inventar.gehege + 1
+        spieler.inventar.geld = spieler.inventar.geld -5
+        love.audio.play(geldSound)
+    end
+end
+
+function kaufeKuh()
+    if spieler.inventar.geld >= 50 then
+        spieler.inventar.geld = spieler.inventar.geld -50
+        love.audio.play(geldSound)
+        spawnEntitaet("kuh", spieler.x, spieler.y)
+    end
+end
+
+function kaufeSchwein()
+    if spieler.inventar.geld >= 30 then
+        spieler.inventar.geld = spieler.inventar.geld -30
+        love.audio.play(geldSound)
+        spawnEntitaet("schwein", spieler.x, spieler.y)
+    end
+end
+
+function kaufeSchaf()
+    if spieler.inventar.geld >= 70 then
+        spieler.inventar.geld = spieler.inventar.geld -70
+        love.audio.play(geldSound)
+        spawnEntitaet("schaf", spieler.x, spieler.y)
+    end
+end
+
+function kaufeHuhn()
+    if spieler.inventar.geld >= 80 then
+        spieler.inventar.geld = spieler.inventar.geld -80
+        love.audio.play(geldSound)
+        spawnEntitaet("huhn", spieler.x, spieler.y)
     end
 end
