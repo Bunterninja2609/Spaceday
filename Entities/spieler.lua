@@ -176,7 +176,7 @@ function bewegeSpieler(speed,body)
     body:setLinearVelocity(speedX,speedY)
 end
 function shopTaste()
-    if love.keyboard.isDown("k") then
+    if love.keyboard.isDown("g") then
         spieler.nutzeShop = true
     else
         spieler.nutzeShop = false
