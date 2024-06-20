@@ -90,14 +90,9 @@ function platziereGehege(x,y)
         end
     end 
     if canPlace == true then
-        if spieler.inventar.geld < 5 then
-            if spieler.inventar.gehege>=2 then
-                spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
-                spieler.inventar.gehege = spieler.inventar.gehege -2
-            end
-        elseif spieler.inventar.geld >= 5 then
+        if spieler.inventar.gehege>=1 then
             spawnEntitaet("gehege", math.floor(x/30)*30, math.floor(y/30)*30)
-            spieler.inventar.geld = spieler.inventar.geld-5
+            spieler.inventar.gehege = spieler.inventar.gehege -1
         end
     end
 end
@@ -157,11 +152,8 @@ function platziereWeizen(x,y)
         end
     end 
     if canPlace == true then
-        if spieler.inventar.geld < 5 and spieler.inventar.weizen > 2  then
-            spieler.inventar.weizen = spieler.inventar.weizen -2
-            spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
-        elseif spieler.inventar.geld >= 5 then
-            spieler.inventar.geld = spieler.inventar.geld-5
+        if spieler.inventar.weizen >= 1  then
+            spieler.inventar.weizen = spieler.inventar.weizen -1
             spawnEntitaet("weizen", math.floor(x/30)*30, math.floor(y/30)*30)
         end
     end
@@ -287,8 +279,8 @@ end
 
 function verkaufeMilch()
     if spieler.inventar.milch > 0 then
-        spieler.inventar.milch = spieler.inventar.milch - 10
-        spieler.inventar.geld = spieler.inventar.geld + 7
+        spieler.inventar.milch = spieler.inventar.milch - 1
+        spieler.inventar.geld = spieler.inventar.geld + 10
         love.audio.play(geldSound)
     end
 end

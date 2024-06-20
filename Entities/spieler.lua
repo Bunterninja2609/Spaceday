@@ -85,15 +85,15 @@ function zeichneShop(x,y)
             if spieler.inventar.level >= 1 then
                 love.graphics.print("Milch (+10 Geld)", x+10, y+50)
                 zeichneVerkaufButton(x,y+50,verkaufeMilch)
-                love.graphics.print("Fleisch (+15 Geld)", x+10, y+70)
+                love.graphics.print("Fleisch (+20 Geld)", x+10, y+70)
                 zeichneVerkaufButton(x,y+70,verkaufeFleisch)
             end
             if spieler.inventar.level >= 3 then
-                love.graphics.print("Wolle (+20 Geld)", x+10, y+90)
+                love.graphics.print("Wolle (+15 Geld)", x+10, y+90)
                 zeichneVerkaufButton(x,y+90,verkaufeWolle)
             end
             if spieler.inventar.level >= 4 then
-                love.graphics.print("Ei (+20 Geld)", x+10, y+110)
+                love.graphics.print("Ei (+15 Geld)", x+10, y+110)
                 zeichneVerkaufButton(x,y+110,verkaufeEi)
             end
 
@@ -174,27 +174,27 @@ end
 function zeichneLevel(w)
     if spieler.inventar.level==0 then
       love.graphics.setColor(1,0,0)
-      love.graphics.rectangle("fill",10,190,w,10)
+      love.graphics.rectangle("fill",10,190,w/50*200,10)
       love.graphics.print("XP:".. spieler.xp .. "/50",10,210)
     end
     if spieler.inventar.level==1 then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.rectangle("fill",10,190,w/250*200,10)
         love.graphics.print("XP:".. spieler.xp .. "/250",10,210)
       end
     if spieler.inventar.level==2  then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.rectangle("fill",10,190,w/500*200,10)
         love.graphics.print("XP:".. spieler.xp .. "/500",10,210)
     end
     if spieler.inventar.level==3 then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.rectangle("fill",10,190,w/1000*200,10)
         love.graphics.print("XP:".. spieler.xp .. "/1000",10,210)
     end
     if spieler.inventar.level==4  then
         love.graphics.setColor(1,0,0)
-        love.graphics.rectangle("fill",10,190,w,10)
+        love.graphics.rectangle("fill",10,190,w/1500*200,10)
         love.graphics.print("XP:".. spieler.xp .. "/1500",10,210)
     end
 end
