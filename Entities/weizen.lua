@@ -2,6 +2,7 @@ local weizen={}
     weizen.type = "weizen"
     weizen.x=100
     weizen.y=0
+    weizen.IsAlive=true
     
     weizen.wachsTimer =0
     weizen.farbeGruen = 205

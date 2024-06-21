@@ -196,10 +196,16 @@ function love.keypressed(key)
         if key == "x" then
             mauspos = {x = camera.mouseX, y = camera.mouseY}
             for i, v in ipairs(Entitaeten) do
-                if mauspos >= v.x and mauspos <= v.x+16 then
-                    if v.type == "gehege" then
-                    spieler.inventar.gehege = spieler.inventar.gehege +1
-                    v.IsAlive = false
+                if mauspos.x >= v.x and mauspos.x <= v.x+16 then
+                    if mauspos.y >= v.y and mauspos.y <= v.y+16 then
+                        if v.type == "gehege" then
+                        spieler.inventar.gehege = spieler.inventar.gehege +1
+                        v.IsAlive = false
+                        end
+                        if v.type == "weizen" then
+                        spieler.inventar.weizen = spieler.inventar.weizen +1
+                        v.IsAlive = false
+                        end
                     end
                 end
             end
@@ -234,7 +240,8 @@ function zeichneInfo(x,y)
         love.graphics.print("2.Schlachten = Taste q drücken", x-390, y+50)
         love.graphics.print("3.Züchten = Taste z drücken", x-390, y+70)
         love.graphics.print("4.Weizen Ernten = Taste e drücken", x-390, y+90)
-        love.graphics.print("5.Shop= Taste g drücken", x-390, y+110)
+        love.graphics.print("5.Löschen = Taste x drücken", x-390, y+110)
+        love.graphics.print("6.Shop= Taste g drücken", x-390, y+130)
     end
 end
 
